@@ -19,7 +19,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public Optional<Book> findById(Long id) {
-        return bookJpaRepository.findById(id);
+        return bookJpaRepository.findByBookId(id);
     }
 
     @Override
@@ -29,7 +29,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public void deleteById(Long id) {
-        bookJpaRepository.deleteById(id);
+        bookJpaRepository.delete(id);
     }
 
     @Override

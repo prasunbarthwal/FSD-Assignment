@@ -1,3 +1,4 @@
+/*
 package com.fsd.assignment.test;
 
 import com.fsd.assignment.dao.BookJpaRepository;
@@ -69,3 +70,4 @@ public class jpaIntegrationTest {
                 .isEqualTo(book.getTitle());
     }
 }
+*/

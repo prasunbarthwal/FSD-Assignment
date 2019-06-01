@@ -18,5 +18,7 @@ public interface SubjectJpaRepository extends CrudRepository<Subject,Long > {
 
 
          Subject save(Subject persisted);
+    Optional<Subject> findBySubject(Long id);
+
 
 }

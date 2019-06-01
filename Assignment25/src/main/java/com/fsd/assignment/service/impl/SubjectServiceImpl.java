@@ -18,12 +18,12 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Override
     public Optional<Subject> findById(Long id) {
-        return subjectJpaRepository.findById(id);
+        return subjectJpaRepository.findBySubject(id);
     }
 
     @Override
     public void deleteById(Long id) {
-        subjectJpaRepository.deleteById(id);
+        subjectJpaRepository.delete(id);
     }
 
     @Override
