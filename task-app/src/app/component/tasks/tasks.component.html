@@ -1,0 +1,59 @@
+
+
+  <!--  <h1>Task Manager Details</h1>
+  <h3>  <a [routerLink] = "'/products'">
+    Add Task
+  </a></h3>   <h3>  <a [routerLink] = "'/tasks'">
+    View Task  </a></h3>
+
+  <ul class="tasks">
+    <li *ngFor="let task of tasks" (click)="onSelect(task)">
+      <span >{{task.id}}</span> {{task.task}}
+    </li>
+  </ul>
+
+  <app-task-detail></app-task-detail>-->
+
+  <div class="container" style="margin-top: 70px;">
+      <input [(ngModel)]="taskSearch" placeholder="Search by task.." class="advancedSearchTextbox">
+      <input [(ngModel)]="parentSearch" placeholder="Search by parent task.." class="advancedSearchTextbox">
+      <input [(ngModel)]="searchText" placeholder="Search by priority.." class="advancedSearchTextbox">
+      <input [(ngModel)]="startDateSearch" placeholder="Search by start date.." class="advancedSearchTextbox">
+      <input [(ngModel)]="endDateSearch" placeholder="Search by end date.." class="advancedSearchTextbox">
+
+
+
+      <p></p>
+      <table class="table table-hover">
+      <thead>
+        <tr>
+          <th class="hidden">Id</th>
+          <th>Task</th>
+          <th>Parent</th>
+          <th>Priority</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let task of tasks | filter: {priority: searchText} | taskFilter: {task: taskSearch} | startDateFilter: {startDate: startDateSearch} | endDateFilter: {endDate: endDateSearch} | parentFilter: {parentTask : parentSearch};">
+          <td class="hidden">{{task.id}}</td>
+          <td>{{ task.task }}</td>
+          <td> {{ task.parent.parentTask }}</td>
+          <td> {{ task.priority }}</td>
+          <td>{{ task.startDate }}</td>
+          <td>{{ task.endDate }}</td>
+          <td>  <button class="btn btn-primary" (click)="editTask(task)"> Edit </button>
+          </td>
+          <td>
+            <button class="btn btn-primary" (click)="endTask(task)"> End Task</button>
+
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

@@ -1,0 +1,59 @@
+<div class="container" style="margin-top: 70px;">
+
+  <div class="row">
+
+    <div class="col-sm-8 offset-sm-2">
+
+      <div>
+          <form name="form" #myform="ngForm" (ngSubmit)="myform.form.valid && onSubmit(myform)" class="form form-register">
+              <div class="form-group">
+                <label for="id">Task:</label>
+                <input  type="text" name="task" class="form-control" id="task" aria-describedby="taskHelp" 
+                placeholder="Enter Task" [(ngModel)]="task.task" #task="ngModel" required>
+                <small id="taskHelp" class="form-text text-muted">Enter your task name</small>
+                <div *ngIf="myform.submitted && task.invalid && (task.dirty || task.touched)"
+                class="alert alert-danger">
+            
+              <div *ngIf="task.errors.required">
+                Task is required.
+              </div>
+              </div>
+          <label for="priority">Priority:</label>
+          <mat-slider
+thumbLabel
+[displayWith]="formatLabel"
+tickInterval="1"
+min="1"
+max="30" name = "priority" (ngModel)="priority"></mat-slider>
+
+<label for="parent task">Parent Task:</label>
+<input type="text" name="parentTask" class="form-control" id="parentTask" aria-describedby="emailHelp"
+  placeholder="Enter parent task" ngModel required>
+<small id="parentTask" class="form-text text-muted">Enter your parent task name</small>
+
+<label for="start date">Start Date:</label>
+<input matInput [matDatepicker]="startDatepicker" placeholder="Choose a start date" name="startDate" [(ngModel)]="startDate"  required>
+<mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+<mat-error *ngIf="myform.startDate.hasError('required')">
+   </mat-error>
+<mat-datepicker #startDatepicker></mat-datepicker>
+
+<label for="end date">End Date:</label>
+<input matInput [matDatepicker]="endDatepicker" placeholder="Choose a end date" name="endDate" (ngModel)="startDate">
+<mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
+<mat-datepicker #endDatepicker></mat-datepicker>
+
+<button type="submit" class="btn btn-primary" >Add Task</button>
+
+
+            <button class="btn btn-primary" type="button"  (click)="onClear()">Reset</button>
+         
+            </div>
+
+            
+</form>
+      </div>
+
+    </div>
+  </div>
+</div>
