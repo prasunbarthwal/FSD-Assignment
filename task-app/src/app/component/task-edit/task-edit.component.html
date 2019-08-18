@@ -5,41 +5,50 @@
       <div class="col-sm-8 offset-sm-2">
   
         <div>
-            <form #editForm="ngForm" (ngSubmit)="onSubmit(editForm)" class="form form-register">
-                <div class="form-group">
-                    <input  type="id" name="id" class="hidden" id="id" ngModel >
-                  <label for="task">Task:</label>
-                  <input  type="text" name="task" class="form-control" id="task" aria-describedby="taskHelp" 
-                  placeholder="Enter Task" ngModel required>
-                  <small id="taskHelp" class="form-text text-muted">Enter your task name</small>
-      
-            <label for="priority">Priority:</label>
-            <input  type="priority" name="priority" class="form-control" id="priority" ngModel >
+              <form [formGroup]="myform" class="form form-register" (ngSubmit)="onSubmit()">
+                  <div class="form-group">
+                    
+                  <label for="id">Task:</label>
+                  <p [ngClass]="{ 'has-error': isSubmitted && formControls.task.errors }">
+                      <input type="text" placeholder="task Name" formControlName="task">
+                    </p>
+                
+                    <div *ngIf="isSubmitted && formControls.task.errors" class="help-block">
+                      <div *ngIf="formControls.task.errors.required">task is required</div>
+                    </div>
+                    <label for="priority">Priority:</label>
             <mat-slider
   thumbLabel
   [displayWith]="formatLabel"
   tickInterval="1"
   min="1"
-  max="30"  name = "priority" id="priority" ngmodel ></mat-slider>
+  max="30" name = "priority" formControlName="priority"></mat-slider>
+  <div *ngIf="isSubmitted && formControls.priority.errors" class="help-block">
+      <div *ngIf="formControls.priority.errors.required">Start date is required</div>
+    </div>
   
-  <label for="parent task">Parent Task:</label>
-  <input type="text" name="parentTask" class="form-control" id="parentTask" aria-describedby="emailHelp"
-    placeholder="Enter parent task" ngModel required>
-  <small id="parentTask" class="form-text text-muted">Enter your parent task name</small>
+                    <label for="id">Parent Task:</label>
+                    <p>
+                        <input type="text" placeholder="Enter parent task " formControlName="parentTask">
+                      </p>
+                      <label for="start date">Start Date:</label>
+                    <input matInput [matDatepicker]="startDatepicker" placeholder="Choose a start date" name="startDate" formControlName="startDate"  required>
+                    <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #startDatepicker></mat-datepicker>
+                    <div *ngIf="isSubmitted && formControls.startDate.errors" class="help-block">
+                        <div *ngIf="formControls.startDate.errors.required">Start date is required</div>
+                      </div>
   
-  <label for="start date">Start Date:</label>
-  <input  matInput [matDatepicker]="startDatepicker" placeholder="Choose a start date" name="startDate" ngModel required>
-  <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
-  <mat-datepicker #startDatepicker></mat-datepicker>
-  
-  <label for="end date">End Date:</label>
-  <input matInput [matDatepicker]="endDatepicker" placeholder="Choose a end date" name="endDate" (ngModel)="startDate">
-  <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
-  <mat-datepicker #endDatepicker></mat-datepicker>
+                      <label for="end date">End Date:</label>
+                      <input matInput [matDatepicker]="endDatepicker" placeholder="Choose a end date" name="endDate" formControlName="endDate">
+                      <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
+                      <mat-datepicker #endDatepicker></mat-datepicker>
+                      
+         
   <button type="submit" class="btn btn-primary" >Update Task</button>
   
   
-              <button class="btn btn-primary" type="button"  (click)="onCancel()">Cancel</button>
+  <button class="btn btn-primary" type="button"  (click)="onCancel()">Cancel</button>
            
               </div>
   

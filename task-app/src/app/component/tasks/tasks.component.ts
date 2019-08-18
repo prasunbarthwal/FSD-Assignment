@@ -31,4 +31,17 @@ export class TasksComponent implements OnInit {
         window.localStorage.setItem("taskId", task.id.toString());
         this.router.navigate(['task-edit']);
       };
+
+      endTask(task: Task): void {
+        console.log("inside end task");
+
+        console.log(task.id.toString())
+       
+
+        this.taskService.endTask(task.id.toString(),task)
+        .subscribe( data => {
+          this.router.navigate(['tasks']);
+        //this.router.navigate(['tasks']);
+      });
+    }
 }

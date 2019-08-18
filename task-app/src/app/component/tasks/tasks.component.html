@@ -45,10 +45,21 @@
           <td> {{ task.priority }}</td>
           <td>{{ task.startDate }}</td>
           <td>{{ task.endDate }}</td>
-          <td>  <button class="btn btn-primary" (click)="editTask(task)"> Edit </button>
+          <td>  
+              <div *ngIf="task.endDate">
+            <button class="btn btn-primary" (click)="editTask(task)" disabled> Edit </button>
+          </div>
+          <div *ngIf="!task.endDate">
+              <button class="btn btn-primary" (click)="editTask(task)" > Edit </button>
+            </div>
           </td>
           <td>
-            <button class="btn btn-primary" (click)="endTask(task)"> End Task</button>
+              <div *ngIf="task.endDate">
+                  <button class="btn btn-primary" (click)="endTask(task)" disabled> End Task </button>
+                </div>
+                <div *ngIf="!task.endDate">
+                    <button class="btn btn-primary" (click)="endTask(task)" > End Task </button>
+                  </div>
 
           </td>
 

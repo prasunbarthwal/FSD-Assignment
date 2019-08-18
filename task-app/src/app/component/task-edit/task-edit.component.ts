@@ -1,7 +1,7 @@
 import { Component, OnInit,ViewChild } from '@angular/core';
 import { TaskService } from '../../service/task.service';
 import {Router} from "@angular/router";
-import { NgForm } from '@angular/forms';
+import {NgForm,FormBuilder, FormGroup, Validators } from  '@angular/forms';
 
 
 @Component({
@@ -11,10 +11,21 @@ import { NgForm } from '@angular/forms';
 })
 export class TaskEditComponent implements OnInit {
 
-  constructor(private taskService: TaskService,private router: Router) { }
-  @ViewChild('editForm') editForm: NgForm;
-
+  constructor(private taskService: TaskService, private router: Router, private formBuilder: FormBuilder ) { }
+  //@ViewChild('editForm') editForm: NgForm;
+  myform: FormGroup;
+  isSubmitted  =  false;
+  get formControls() { return this.myform.controls; }
   ngOnInit() {
+    this.myform  =  this.formBuilder.group({
+      id:[''],
+      task: ['', Validators.required],
+      parentTask: [''],
+      priority: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['']
+
+  });
     let taskId = window.localStorage.getItem("taskId");
     if(!taskId) {
       alert("Invalid action.")
@@ -24,7 +35,7 @@ export class TaskEditComponent implements OnInit {
     this.taskService.getTask(taskId)
     .subscribe( data => {
      // console.log('edit successfull');
-      this.editForm.setValue(data);
+      this.myform.setValue(data);
     });
   }
 

@@ -1,6 +1,7 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import {Component, OnInit,ViewChild } from '@angular/core';
 import {Task} from '../../model/task';
-import { NgForm } from '@angular/forms';
+import {NgForm,FormBuilder, FormGroup, Validators } from  '@angular/forms';
+
 import { TaskService } from '../../service/task.service';
 import {Router} from "@angular/router";
 
@@ -13,15 +14,30 @@ import {Router} from "@angular/router";
 })
 export class TaskDetailComponent implements OnInit {
   task: Task;
-  constructor(private taskService: TaskService,private router: Router) { }
+  constructor(private taskService: TaskService, private router: Router, private formBuilder: FormBuilder ) { }
 
   ngOnInit() {
+    this.myform  =  this.formBuilder.group({
+      task: ['', Validators.required],
+      parentTask: [''],
+      priority: ['', Validators.required],
+      startDate: ['', Validators.required],
+      endDate: ['']
+
+  });
   }
-	@ViewChild('myform') myform: NgForm;
+//@ViewChild('myform') myform: NgForm;
+myform: FormGroup;
+isSubmitted  =  false;
+get formControls() { return this.myform.controls; }
 
-  onSubmit(form: NgForm) {
-    console.log("Course Name is : "+form.controls['task'].value );
 
+  onSubmit() {
+    console.log(this.myform .value);
+    this.isSubmitted = true;
+    if(this.myform.invalid){
+      return;
+    }
     this.taskService.createTask(this.myform.value)
       .subscribe( data => {
         this.router.navigate(['tasks']);
@@ -29,21 +45,8 @@ export class TaskDetailComponent implements OnInit {
       //  this.router.navigate(['list-user']);
       });
 
-  // this.task.task=form.controls['task'].value;
-  //  this.task.priority=form.controls['priority'].value;
-
-    //this.task.endDate=form.controls['endDate'].value;
-
-  //  this.task.startDate=form.controls['startDate'].value;
-
-  //  this.task.parent.parentTask=form.controls['parentTask'].value;
-
-  // this.taskService.createTask(this.task).subscribe((res)=>{
- //     console.log("Created Task");
-//});
     }
     onClear() {
-      // Now that we have access to the form via the 'ViewChild', we can access the form and clear it.
       this.myform.reset();
       }
 

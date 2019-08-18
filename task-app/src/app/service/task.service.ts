@@ -34,4 +34,10 @@ export class TaskService {
   {
     return this.httpService.post(`${this.API_URL + 'task'}`,task);
   }
+
+  public endTask(taskId,task:Task)
+  {
+    console
+    return this.httpService.put(`${this.API_URL + 'endTask'}/${taskId}`, task);
+  }
 }
