@@ -39,6 +39,20 @@ export class TaskEditComponent implements OnInit {
     });
   }
 
+  onSubmit() {
+    console.log(this.myform .value);
+    this.isSubmitted = true;
+    if(this.myform.invalid){
+      return;
+    }
+    this.taskService.updateTask(this.myform.value)
+      .subscribe( data => {
+        this.router.navigate(['tasks']);
+
+      //  this.router.navigate(['list-user']);
+      });
+
+    }
   onCancel() {
     this.router.navigate(['tasks']);
     }

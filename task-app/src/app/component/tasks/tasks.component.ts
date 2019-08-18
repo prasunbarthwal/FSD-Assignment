@@ -20,6 +20,7 @@ export class TasksComponent implements OnInit {
   constructor(private taskService: TaskService, private router: Router) { }
 
   ngOnInit() {
+    console.log("1");
     this.taskService.getTaskList().subscribe(tasks =>
     
       this.tasks = tasks);
@@ -40,8 +41,15 @@ export class TasksComponent implements OnInit {
 
         this.taskService.endTask(task.id.toString(),task)
         .subscribe( data => {
-          this.router.navigate(['tasks']);
+          this.reloadComponent();
+        //  this.router.navigate(['tasks']);
         //this.router.navigate(['tasks']);
       });
     }
+
+    reloadComponent() {
+      this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+      this.router.onSameUrlNavigation = 'reload';
+      this.router.navigate(['/tasks']);
+  }
 }

@@ -1,61 +1,54 @@
-<div class="container" style="margin-top: 70px;">
-
+<div class="container">
   <div class="row">
+    <div class="col-sm-8 offset-sm-2">    
+      <form [formGroup]="myform" class="form form-register" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+              <label for="task">Task:</label>
+              <input type="text" placeholder="task Name" formControlName="task">
+              <div *ngIf="isSubmitted && formControls.task.errors" class="help-block">
+                  <div *ngIf="formControls.task.errors.required">task is required </div>
+              </div>
+           </div>
+           <div class="form-group">
+              <label for="priority">Priority:</label>
+              <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="30" name = "priority" formControlName="priority"></mat-slider>
+                <div *ngIf="isSubmitted && formControls.priority.errors" class="help-block">
+                   <div *ngIf="formControls.priority.errors.required">Start date is required</div>
+                </div>
+              </div>
+            <div class="form-group">
+                <label for="id">Parent Task:</label>
+                <input type="text" placeholder="Enter parent task " formControlName="parentTask">
+            </div> 
 
-    <div class="col-sm-8 offset-sm-2">
-
-      <div>
-            <form [formGroup]="myform" class="form form-register" (ngSubmit)="onSubmit()">
-                <div class="form-group">
-                  
-                <label for="id">Task:</label>
-                <p [ngClass]="{ 'has-error': isSubmitted && formControls.task.errors }">
-                    <input type="text" placeholder="task Name" formControlName="task">
-                  </p>
-              
-                  <div *ngIf="isSubmitted && formControls.task.errors" class="help-block">
-                    <div *ngIf="formControls.task.errors.required">task is required</div>
+            <div class="form-group">
+                <label for="start date">Start Date:</label>
+                <input matInput [matDatepicker]="startDatepicker" placeholder="Choose a start date" name="startDate" formControlName="startDate"  required>
+                <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #startDatepicker></mat-datepicker>
+                <div *ngIf="isSubmitted && formControls.startDate.errors" class="help-block">
+                    <div *ngIf="formControls.startDate.errors.required">Start date is required</div>
                   </div>
-                  <label for="priority">Priority:</label>
-          <mat-slider
-thumbLabel
-[displayWith]="formatLabel"
-tickInterval="1"
-min="1"
-max="30" name = "priority" formControlName="priority"></mat-slider>
-<div *ngIf="isSubmitted && formControls.priority.errors" class="help-block">
-    <div *ngIf="formControls.priority.errors.required">Start date is required</div>
-  </div>
-
-                  <label for="id">Parent Task:</label>
-                  <p>
-                      <input type="text" placeholder="Enter parent task " formControlName="parentTask">
-                    </p>
-                    <label for="start date">Start Date:</label>
-                  <input matInput [matDatepicker]="startDatepicker" placeholder="Choose a start date" name="startDate" formControlName="startDate"  required>
-                  <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
-                  <mat-datepicker #startDatepicker></mat-datepicker>
-                  <div *ngIf="isSubmitted && formControls.startDate.errors" class="help-block">
-                      <div *ngIf="formControls.startDate.errors.required">Start date is required</div>
-                    </div>
-
-                    <label for="end date">End Date:</label>
-                    <input matInput [matDatepicker]="endDatepicker" placeholder="Choose a end date" name="endDate" formControlName="endDate">
-                    <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
-                    <mat-datepicker #endDatepicker></mat-datepicker>
-                    
-       
-<button type="submit" class="btn btn-primary" >Add Task</button>
-
-
-            <button class="btn btn-primary" type="button"  (click)="onClear()">Reset</button>
-         
             </div>
-
-            
-</form>
-      </div>
-
+             
+            <div class="form-group">
+                <label for="end date">End Date:</label>
+                <input matInput [matDatepicker]="endDatepicker" placeholder="Choose a end date" name="endDate" formControlName="endDate">
+                <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
+                <mat-datepicker #endDatepicker></mat-datepicker>
+            </div>
+            <div class="form-group">
+                <label for="empty"></label>
+            </div>
+           
+            <div class="form-group">
+                <button type="submit" style="  margin-right:100px">Add Task</button>
+                <button  type="button"  (click)="onClear()">Reset</button>
+              </div>
+                 
+                
+          </form>
     </div>
   </div>
+
 </div>
