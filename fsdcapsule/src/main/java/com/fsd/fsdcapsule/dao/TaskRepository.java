@@ -8,8 +8,6 @@ import java.util.List;
 
 @Repository
 public interface TaskRepository extends JpaRepository <Task,Long> {
-   // Task save(Task persisted);
-   /* List<Task> findAll();
-    Task findById();*/
+
 
 }

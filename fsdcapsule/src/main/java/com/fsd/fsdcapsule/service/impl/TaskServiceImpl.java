@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -51,15 +52,11 @@ public class TaskServiceImpl implements TaskService {
         oldTask.setPriority(taskDto.getPriority());
         oldTask.setEndDate(taskDto.getEndDate());
         oldTask.setStartDate(taskDto.getStartDate());
+        if (Objects.nonNull(oldTask.getParentTask()))
         oldTask.getParentTask().setParentTask(taskDto.getParentTask());
-       /* Task updatedTask  = Task.builder()
-                .id(tas)
-                .endDate(taskDto.getEndDate())
-                .startDate(taskDto.getStartDate())
-                .task(taskDto.getTask())
-                .priority(taskDto.getPriority())
-                .parentTask((taskDto.getParentTask()!=null &&  taskDto.getParentTask()!="")   ? ParentTask.builder().parentTask(taskDto.getParentTask()).build():null)
-                .build();*/
+        else
+        oldTask.setParentTask(ParentTask.builder().parentTask(taskDto.getParentTask()).build());
+
         return taskRepository.save(oldTask);
     }
 
