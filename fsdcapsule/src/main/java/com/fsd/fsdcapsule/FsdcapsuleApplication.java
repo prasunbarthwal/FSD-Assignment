@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EntityScan("com.fsd.fsdcapsule.model")
 public class FsdcapsuleApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(FsdcapsuleApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(FsdcapsuleApplication.class, args);
+    }
 
 }

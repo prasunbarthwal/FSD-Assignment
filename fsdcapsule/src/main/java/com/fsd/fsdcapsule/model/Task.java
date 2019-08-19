@@ -19,33 +19,33 @@ import java.util.Date;
 
 public class Task implements Serializable {
 
-    private static final long serialVersionUID =1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="task_id",updatable = false, nullable = false)
+    @Column(name = "task_id", updatable = false, nullable = false)
     private Long id;
 
     /*@Column(name="parent_id")
     private Long parentId;
 */
-    @Column(name="task")
+    @Column(name = "task")
     private String task;
 
-    @Column(name="start_date")
-  //  @Temporal(TemporalType.DATE)
+    @Column(name = "start_date")
+    //  @Temporal(TemporalType.DATE)
     private LocalDate startDate;
 
-    @Column(name="end_date")
+    @Column(name = "end_date")
     //@Temporal(TemporalType.DATE)
     private LocalDate endDate;
 
-    @Column(name="priority")
+    @Column(name = "priority")
     private Integer priority;
 
     @OneToOne(cascade = CascadeType.ALL)
-   // @OneToOne(mappedBy = "task",cascade = CascadeType.ALL)
-   @JoinColumn(name="parent_id")
+    // @OneToOne(mappedBy = "task",cascade = CascadeType.ALL)
+    @JoinColumn(name = "parent_id")
     //@ToString.Exclude
     private ParentTask parentTask;
 

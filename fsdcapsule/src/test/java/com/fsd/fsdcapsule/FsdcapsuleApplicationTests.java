@@ -26,64 +26,61 @@ import static org.junit.Assert.assertNotNull;
 
 public class FsdcapsuleApplicationTests {
 
-	@Test
-	public void contextLoads() {
-	}
+    @Test
+    public void contextLoads() {
+    }
 
-	@TestConfiguration
-	static class BookServiceImplTestContextConfiguration {
+    @TestConfiguration
+    static class BookServiceImplTestContextConfiguration {
 
-		@Bean
-		public TaskService taskService() {
-			return new TaskServiceImpl();
-		}
-
-
-	}
-
-	/*@Autowired
-	private TestEntityManager entityManager;*/
-
-	@Autowired
-	TaskRepository taskRepository;
-
-	@Test
-	public void whenFindById_thenReturnTask() {
-		// given
-		Task task = new Task();
-		//task.setId(Long.getLong("3"));
-		task.setTask("TestTask");
-		task.setPriority(10);
-
-		task =taskRepository.save(task);
-
-		// when
-		Task found = taskRepository.findById(task.getId()).get();
-
-		assertNotNull(found);
-
-		// then
-		assertThat(found.getPriority())
-				.isEqualTo(task.getPriority());
-		assertThat(found.getTask()).isEqualTo(task.getTask());
-	}
-
-	@Test
-	public void saveTaskTest (){
-		// given
-		Task task = new Task();
-		//task.setId(Long.getLong("3"));
-		task.setTask("TestTask");
-		task.setPriority(10);
-
-		task =taskRepository.save(task);
-
-		// when
-		Task found = taskRepository.findById(task.getId()).get();
-
-		assertNotNull(found);
+        @Bean
+        public TaskService taskService() {
+            return new TaskServiceImpl();
+        }
 
 
-	}
+    }
+
+    @Autowired
+    TaskRepository taskRepository;
+
+    @Test
+    public void whenFindById_thenReturnTask() {
+        // given
+        Task task = new Task();
+        //task.setId(Long.getLong("3"));
+        task.setTask("TestTask");
+        task.setPriority(10);
+
+        task = taskRepository.save(task);
+
+        // when
+        Task found = taskRepository.findById(task.getId()).get();
+
+        assertNotNull(found);
+
+        // then
+        assertThat(found.getPriority())
+                .isEqualTo(task.getPriority());
+        assertThat(found.getTask()).isEqualTo(task.getTask());
+    }
+
+    @Test
+    public void saveTaskTest() {
+        // given
+        Task task = new Task();
+        //task.setId(Long.getLong("3"));
+        task.setTask("TestTask");
+        task.setPriority(10);
+
+        task = taskRepository.save(task);
+
+        // when
+        Task found = taskRepository.findById(task.getId()).get();
+
+        assertNotNull(found);
+
+
+    }
 
 }
