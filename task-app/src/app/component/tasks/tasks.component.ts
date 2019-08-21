@@ -20,11 +20,9 @@ export class TasksComponent implements OnInit {
   constructor(private taskService: TaskService, private router: Router) { }
 
   ngOnInit() {
-    console.log("1");
     this.taskService.getTaskList().subscribe(tasks =>
     
       this.tasks = tasks);
-      console.log(this.tasks);
       }
 
       editTask(task: Task): void {
@@ -34,10 +32,6 @@ export class TasksComponent implements OnInit {
       };
 
       endTask(task: Task): void {
-        console.log("inside end task");
-
-        console.log(task.id.toString())
-       
 
         this.taskService.endTask(task.id.toString(),task)
         .subscribe( data => {

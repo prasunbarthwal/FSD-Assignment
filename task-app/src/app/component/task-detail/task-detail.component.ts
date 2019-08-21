@@ -33,7 +33,6 @@ get formControls() { return this.myform.controls; }
 
 
   onSubmit() {
-    console.log(this.myform .value);
     this.isSubmitted = true;
     if(this.myform.invalid){
       return;

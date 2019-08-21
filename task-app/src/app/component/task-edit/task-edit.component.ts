@@ -34,13 +34,11 @@ export class TaskEditComponent implements OnInit {
     }
     this.taskService.getTask(taskId)
     .subscribe( data => {
-     // console.log('edit successfull');
       this.myform.setValue(data);
     });
   }
 
   onSubmit() {
-    console.log(this.myform .value);
     this.isSubmitted = true;
     if(this.myform.invalid){
       return;
