@@ -27,11 +27,11 @@ public class FsdSbaApplicationTests {
     }
 
     @TestConfiguration
-    static class BookServiceImplTestContextConfiguration {
+    static class ServiceImplTestContextConfiguration {
 
         @Bean
-        public TaskService taskService() {
-            return new TaskServiceImpl();
+        public UserService userService() {
+            return new UserServiceImpl();
         }
 
 
@@ -43,7 +43,7 @@ public class FsdSbaApplicationTests {
     @Test
     public void whenFindById_thenReturnTask() {
         // given
-        Task task = new Task();
+        User task = new User();
         //task.setId(Long.getLong("3"));
         task.setTask("TestTask");
         task.setPriority(10);
@@ -51,7 +51,7 @@ public class FsdSbaApplicationTests {
         task = taskRepository.save(task);
 
         // when
-        Task found = taskRepository.findById(task.getId()).get();
+        User found = taskRepository.findById(task.getId()).get();
 
         assertNotNull(found);
 
@@ -64,7 +64,7 @@ public class FsdSbaApplicationTests {
     @Test
     public void saveTaskTest() {
         // given
-        Task task = new Task();
+        User task = new User();
         //task.setId(Long.getLong("3"));
         task.setTask("TestTask");
         task.setPriority(10);
@@ -72,7 +72,7 @@ public class FsdSbaApplicationTests {
         task = taskRepository.save(task);
 
         // when
-        Task found = taskRepository.findById(task.getId()).get();
+        User found = taskRepository.findById(task.getId()).get();
 
         assertNotNull(found);
 
