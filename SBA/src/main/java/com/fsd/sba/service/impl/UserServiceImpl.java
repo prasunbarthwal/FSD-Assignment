@@ -45,14 +45,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(UserDTO userDTO) {
+    public User saveUser(UserDTO userDTO) {
 
         User user = User.builder()
                 .empId(userDTO.getEmpId())
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
                 .build();
-        userRepository.save(user);
+         user  = userRepository.save(user);
+         return user;
 
     }
 

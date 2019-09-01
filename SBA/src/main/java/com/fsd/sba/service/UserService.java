@@ -1,6 +1,7 @@
 package com.fsd.sba.service;
 
 import com.fsd.sba.dto.UserDTO;
+import com.fsd.sba.model.User;
 
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface UserService {
 
      UserDTO findUser(Long id);
 
-     void saveUser(UserDTO userDTO);
+     User saveUser(UserDTO userDTO);
 
      void updateUser(UserDTO userDTO);
 
