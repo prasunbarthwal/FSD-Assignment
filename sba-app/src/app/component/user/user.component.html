@@ -1,0 +1,87 @@
+<form [formGroup]="userForm" class="form form-register" (ngSubmit)="onAddSubmit(userForm)" >
+    
+    <div class="form-group row">
+  <input type="text" placeholder="User Id" formControlName="userId" class="form-control" [hidden]="true">
+    </div>
+  <div class="form-group row">
+    <label for="firstName" class="col-sm-2 col-form-label">First Name:</label>
+    <div class="col-sm-7">
+        <input type="text" placeholder="First Name is mandatory" formControlName="firstName" class="form-control" >
+        <div *ngIf="isSubmitted && formControls.firstName.errors" class="help-block">
+            <div *ngIf="formControls.firstName.errors.required" >First Name is required </div>
+    </div>
+  </div>
+  </div>
+  <div class="form-group row">
+    <label for="lastName" class="col-sm-2 col-form-label">Last Name:</label>
+    <div class="col-sm-7">
+        <input type="text" placeholder="Last Name is mandatory" formControlName="lastName" class="form-control" >
+        <div *ngIf="isSubmitted && formControls.lastName.errors" class="help-block">
+            <div *ngIf="formControls.lastName.errors.required">Last Name is required </div>
+        </div>
+    </div>
+  </div>
+  <div class="form-group row">
+      <label for="empId" class="col-sm-2 col-form-label">Employee ID:</label>
+      <div class="col-sm-5">
+          <input type="text" placeholder="Employee Id is mandatory" formControlName="empId" class="form-control" >
+            <div *ngIf="isSubmitted && formControls.empId.errors" class="help-block">
+                <div *ngIf="formControls.empId.errors.required">Employee Id is mandatory </div>
+                <div *ngIf="formControls.empId.errors.min">Employee Id minimum value should be 1 </div>
+                <div *ngIf="formControls.empId.errors.pattern">Employee Id should be a number</div>
+
+            </div>
+      </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-1">
+        </div>
+        <div class="col-2">
+            <div *ngIf="!showActions">
+                <input type="submit" class="btn btn-primary " value="Add" >
+            </div>
+             <div *ngIf="showActions">
+
+                      <input type="submit" class="btn btn-primary" value="Update" >
+  
+             </div>          
+          </div>
+          <div class="col-3">
+            </div>
+          <div class="col-2">
+              <input class="btn btn-primary" value="Reset" (click)="onClear()" >
+            </div>
+        
+      </div>
+      
+</form>
+
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Employee Id </th>
+        
+      </tr>
+    </thead>
+    <tbody>
+        
+
+
+    <tr *ngFor="let user of users | userFilter: {firstName: userSearch,lastName: userSearch, empId:userSearch}; let i = index">
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.empId}}</td>
+        <td>  
+          <button class="btn btn-primary" (click)="editUser(user,i)" > Edit </button>                 
+            
+          </td>
+          <td><button class="btn btn-primary" (click)="delUser(user,i)"> Delete </button>
+          
+        </td>
+       
+
+      </tr>
+    </tbody>
+  </table>
