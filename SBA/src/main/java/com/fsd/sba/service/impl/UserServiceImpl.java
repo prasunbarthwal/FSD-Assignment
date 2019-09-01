@@ -52,13 +52,13 @@ public class UserServiceImpl implements UserService {
                 .firstName(userDTO.getFirstName())
                 .lastName(userDTO.getLastName())
                 .build();
-         user  = userRepository.save(user);
-         return user;
+        user = userRepository.save(user);
+        return user;
 
     }
 
     @Override
-    public void updateUser(UserDTO userDTO) {
+    public User updateUser(UserDTO userDTO) {
 
         User user = userRepository.getOne(userDTO.getUserId());
 
@@ -66,7 +66,9 @@ public class UserServiceImpl implements UserService {
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
 
-        userRepository.save(user);
+        user = userRepository.save(user);
+
+        return user;
 
     }
 

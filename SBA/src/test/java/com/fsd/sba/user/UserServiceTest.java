@@ -2,10 +2,12 @@ package com.fsd.sba.user;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
 import com.fsd.sba.dao.UserRepository;
 import com.fsd.sba.dto.UserDTO;
 import com.fsd.sba.model.Project;
@@ -30,9 +32,10 @@ public class UserServiceTest {
     private UserServiceImpl userService;
 
     @Before
-    public void setup(){
+    public void setup() {
         MockitoAnnotations.initMocks(this);
     }
+
     private Long userId;
 
     private String lastName;
@@ -42,7 +45,7 @@ public class UserServiceTest {
     private Integer empId;
 
     @Test
-    public void testGetAllToDo(){
+    public void testGetAllToDo() {
         List<User> userList = new ArrayList<User>();
         userList.add(new User());
         userList.add(new User());
@@ -54,28 +57,56 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testGetUserById(){
-        User user = new User(Long.valueOf(1),"Last Name","First Name",1,new Project());
+    public void testGetUserById() {
+        User user = new User(Long.valueOf(1), "Last Name", "First Name", 1, new Project());
         when(userRepository.getOne(1L)).thenReturn(user);
         UserDTO result = userService.findUser(Long.valueOf(1));
         assertEquals(Long.valueOf(1), result.getUserId());
         assertEquals("First Name", result.getFirstName());
+        assertEquals("Last Name", result.getLastName());
+        assertEquals(Integer.valueOf(1), result.getEmpId());
     }
 
     @Test
-    public void saveUser(){
-        UserDTO userDTO = new UserDTO(Long.valueOf(1),"Last Name","First Name",1);
-      //  User user = new User(Long.valueOf(1),"Last Name","First Name",1,new Project());
+    public void saveUser() {
+        UserDTO userDTO = new UserDTO(Long.valueOf(1), "Last Name", "First Name", 1);
+        //  User user = new User(Long.valueOf(1),"Last Name","First Name",1,new Project());
         User user = User.builder()
                 .empId(1)
                 .firstName("First Name")
                 .lastName("Last Name")
                 .build();
-        User saved = new User(Long.valueOf(2),"Last Name","First Name",1,new Project());
+        User saved = new User(Long.valueOf(2), "Last Name", "First Name", 1, new Project());
         when(userRepository.save(user)).thenReturn(saved);
         User result = userService.saveUser(userDTO);
         assertEquals(Long.valueOf(2), result.getUserId());
         assertEquals("First Name", result.getFirstName());
+        assertEquals("Last Name", result.getLastName());
+
         assertEquals(Integer.valueOf(1), result.getEmpId());
     }
+
+    @Test
+    public void updateUser() {
+        UserDTO userDTO = new UserDTO(Long.valueOf(1), "Last Name", "First Name", 1);
+        //  User user = new User(Long.valueOf(1),"Last Name","First Name",1,new Project());
+        User userExisting = new User(Long.valueOf(1), "Last Name", "First Name", 1, new Project());
+        when(userRepository.getOne(1L)).thenReturn(userExisting);
+        User user = User.builder()
+                .userId(Long.valueOf(1))
+                .empId(1)
+                .firstName("First Name")
+                .lastName("Last Name")
+                .project(new Project())
+                .build();
+        User saved = new User(Long.valueOf(1), "Last Name Changed", "First Name", 2, new Project());
+        when(userRepository.save(user)).thenReturn(saved);
+        User result = userService.updateUser(userDTO);
+        assertEquals(Long.valueOf(1), result.getUserId());
+        assertEquals("First Name", result.getFirstName());
+        assertEquals("Last Name Changed", result.getLastName());
+
+        assertEquals(Integer.valueOf(2), result.getEmpId());
+    }
+
 }
