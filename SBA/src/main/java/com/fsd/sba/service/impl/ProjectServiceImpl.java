@@ -25,6 +25,9 @@ public class ProjectServiceImpl implements ProjectService {
     ProjectRepository projectRepository;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     UserService userService;
 
     @Override
@@ -52,18 +55,20 @@ public class ProjectServiceImpl implements ProjectService {
     public Project saveProject(ProjectDTO projectDTO) {
 
         UserDTO userDTO = userService.findUser(projectDTO.getUserId());
+        User user = userRepository.getOne(projectDTO.getUserId());
 
         Project project = Project.builder()
                 .projectName(projectDTO.getProjectName())
                 .endDate(projectDTO.getEndDate())
                 .startDate(projectDTO.getStartDate())
                 .priority(projectDTO.getPriority())
-                .user(User.builder()
+                .user(user).build();
+             /*   .user(User.builder()
                         .empId(userDTO.getEmpId())
                         .firstName(userDTO.getFirstName())
                         .lastName(userDTO.getLastName())
                         .userId(userDTO.getUserId())
-                        .build()).build();
+                        .build()).build();*/
 
 
         project = projectRepository.save(project);

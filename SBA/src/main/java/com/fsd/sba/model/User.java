@@ -32,10 +32,13 @@ public class User implements Serializable {
 
     @Column(name = "emp_id")
     private Integer empId;
-
+/*
     @Column(name = "project_id")
-    private Integer projectId;
+    private Integer projectId;*/
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "project_id")
+    private Project project;
    /* @OneToOne(cascade = CascadeType.ALL)
     // @OneToOne(mappedBy = "task",cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")

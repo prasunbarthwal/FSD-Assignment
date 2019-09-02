@@ -38,7 +38,7 @@ export class ProjectComponent implements OnInit {
      this.projects = projectList);
      this.projectForm  =  this.formBuilder.group({
        index: [{value: null, disabled:true}],
-       projectId:[{value:''}],
+       projectId:[''],
        userId:[{value:''}],
        setDate:[{value:''}],
     //   show:[{value: false, disabled:true}],
@@ -57,6 +57,8 @@ export class ProjectComponent implements OnInit {
    
   onUpdateSubmit(userForm)
   {
+    console.log('inside update 1');
+
     this.isSubmitted = true;
     if(this.projectForm.invalid){
       return;
@@ -71,7 +73,7 @@ export class ProjectComponent implements OnInit {
   }
 
   onAddSubmit(projectForm) {
-    console.log('inside create 1'+this.projectForm.value);
+    console.log('inside create 5'+this.projectForm.value);
     console.log(this.formControls.projectName.value);
     console.log(this.formControls.userId.value);
     console.log(this.formControls.manager.value);
@@ -154,6 +156,7 @@ enableDate()
 
         this.dialog.open(ModalComponent, dialogConfig);
         const dialogRef = this.dialog.open(ModalComponent, dialogConfig);
+
         dialogRef.afterClosed().subscribe(
           data => 
           this.projectForm.patchValue({

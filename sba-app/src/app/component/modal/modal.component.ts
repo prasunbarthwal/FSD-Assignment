@@ -3,6 +3,7 @@ import { UserService } from '../../service/user.service';
 import {User} from '../../model/user';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
 import {FormBuilder, FormGroup,FormControl } from  '@angular/forms';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -15,12 +16,15 @@ export class ModalComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private userService: UserService,private dialogRef: MatDialogRef<ModalComponent>) { }
   users: User[]=[];
   form: FormGroup;
+  private httpSubscription: Subscription;
+
 
  // private dialogRef: MatDialogRef<ModalComponent>;
 
 
   ngOnInit() {
-    this.userService.getUserList().subscribe(userList =>
+    //alert(2);
+  this.httpSubscription =  this.userService.getUserList().subscribe(userList =>
       this.users = userList);
       this.form  =  this.formBuilder.group({
         index: [{value: null, disabled:true}],
@@ -31,8 +35,10 @@ export class ModalComponent implements OnInit {
        
   
     });
+  }
 
-
+  ngOnDestroy() {
+    this.httpSubscription.unsubscribe();
   }
 
   selectUser(user:User, i) {

@@ -46,9 +46,11 @@ public class Project implements Serializable {
     @Column(name="project")
     private String projectName;
 
-    @OneToOne(cascade = CascadeType.ALL)
+   /* @OneToOne(cascade = CascadeType.ALL)
     // @OneToOne(mappedBy = "task",cascade = CascadeType.ALL)
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "project_id")*/
+   @OneToOne(mappedBy = "project", cascade = CascadeType.ALL,
+           fetch = FetchType.LAZY, optional = false)
     private User user;
 
 }

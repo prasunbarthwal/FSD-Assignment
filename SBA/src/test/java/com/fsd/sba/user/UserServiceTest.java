@@ -97,7 +97,7 @@ public class UserServiceTest {
                 .empId(1)
                 .firstName("First Name")
                 .lastName("Last Name")
-                .projectId(null)
+               // .projectId(null)
                 .build();
         User saved = new User(Long.valueOf(1), "Last Name Changed", "First Name", 2,null);
         when(userRepository.save(user)).thenReturn(saved);
