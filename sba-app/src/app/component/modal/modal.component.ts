@@ -37,7 +37,11 @@ export class ModalComponent implements OnInit {
 
   selectUser(user:User, i) {
     console.log("inside select user");
+    console.log("userID"+user.userId);
+    console.log("userID"+user.firstName);
 
+
+    
     this.form.setValue({
       index: i,
       userId:user.userId,

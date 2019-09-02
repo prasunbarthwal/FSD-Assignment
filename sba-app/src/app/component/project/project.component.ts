@@ -44,17 +44,67 @@ export class ProjectComponent implements OnInit {
     //   show:[{value: false, disabled:true}],
     projectName: ['', Validators.required],
     priority: ['', Validators.required],
-       manager: [{value:'', disabled:true}, Validators.required],
+       manager: [{value:''}],
        startDate: [{value:'', disabled:true}],
        endDate:[{value:'', disabled:true}]
  
-   },{
-    validator: CompareDate('startDate', 'endDate')
    });
   
  
    }
    get formControls() { return this.projectForm.controls; }
+
+   
+  onUpdateSubmit(userForm)
+  {
+    this.isSubmitted = true;
+    if(this.projectForm.invalid){
+      return;
+    }
+    this.projectService.updateProject(this.projectForm.value)
+    .subscribe( data => {
+    // this.router.navigate(['add-user']);
+ this.reloadComponent();
+   });
+   this.projectForm.reset() // reset form to empty
+
+  }
+
+  onAddSubmit(projectForm) {
+    console.log('inside create 1'+this.projectForm.value);
+    console.log(this.formControls.projectName.value);
+    console.log(this.formControls.userId.value);
+    console.log(this.formControls.manager.value);
+
+
+    this.isSubmitted = true;
+    if(this.projectForm.invalid){
+      console.log('inside invalid'+this.projectForm.value);
+
+      return;
+    }
+  let index = projectForm.getRawValue().index
+  console.log('inside create 2'+index);
+
+  if(index != null) {
+    console.log('inside update');
+    this.projects[index] = projectForm.value;
+    this.onUpdateSubmit(projectForm)
+
+  } else {
+   // this.users.push(userForm.value)
+   console.log('inside create 3'+this.projectForm.value);
+
+   this.projectService.createProject(this.projectForm.value)
+   .subscribe( data => {
+   // this.router.navigate(['add-user']);
+this.reloadComponent();
+  });
+  }
+  this.projectForm.reset() // reset form to empty
+  }
+
+ 
 
    reloadComponent() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;

@@ -33,10 +33,13 @@ public class User implements Serializable {
     @Column(name = "emp_id")
     private Integer empId;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @Column(name = "project_id")
+    private Integer projectId;
+
+   /* @OneToOne(cascade = CascadeType.ALL)
     // @OneToOne(mappedBy = "task",cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")
     //@ToString.Exclude
-    private Project project;
+    private Project project;*/
 
 }

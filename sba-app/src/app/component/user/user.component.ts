@@ -33,7 +33,7 @@ export class UserComponent implements OnInit {
     this.users = userList);
     this.userForm  =  this.formBuilder.group({
       index: [{value: null, disabled:true}],
-      userId:[{value:''}],
+      userId:[''],
    //   show:[{value: false, disabled:true}],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -73,7 +73,7 @@ export class UserComponent implements OnInit {
 
   } else {
    // this.users.push(userForm.value)
-       
+       console.log("creating user 1"+this.userForm.value)
    this.userService.createUser(this.userForm.value)
    .subscribe( data => {
    // this.router.navigate(['add-user']);

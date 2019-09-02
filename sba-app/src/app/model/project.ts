@@ -11,13 +11,18 @@ export class Project implements Deserializable{
     totalTask:number;
     completedTask:number;
     priority:number;
-    user:User;
+    manager:string;
+    userId:number;
+    index:number;
+    setDate:boolean;
+   // user:User;
 
     
     deserialize(input: any): this {
         // alert(input.parentTask);
           Object.assign(this, input);
-         
+         // this.user =  new User().deserialize(input.parentTask);
+
           return this;
        }
 
