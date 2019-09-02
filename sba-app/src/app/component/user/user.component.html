@@ -55,7 +55,19 @@
       </div>
       
 </form>
-
+<table >
+    <tbody>
+    <tr>
+        <td> <input [(ngModel)]="userSearch" placeholder="Search..." class="advancedSearchTextbox">
+        </td>
+        <td>Sort :</td>
+        <td>  <button (click)="sortFName()">First Name </button>  </td>
+        <td>  <button (click)="sortLName()">Last Name </button>  </td>
+        <td>  <button (click)="sortEmpId()">Id </button> 
+    </tr>
+    
+    </tbody>
+    </table>
 <table class="table table-hover">
     <thead>
       <tr>

@@ -3,7 +3,6 @@ import {User} from '../../model/user';
 import {Router} from "@angular/router";
 import {NgForm,FormBuilder, FormGroup, Validators,FormControl } from  '@angular/forms';
 import { UserService } from '../../service/user.service';
-import { setRootDomAdapter } from '@angular/platform-browser/src/dom/dom_adapter';
 
 
 @Component({
@@ -52,7 +51,6 @@ export class UserComponent implements OnInit {
     if(this.userForm.invalid){
       return;
     }
-    console.log(this.userForm.value);
     this.userService.updateUser(this.userForm.value)
     .subscribe( data => {
     // this.router.navigate(['add-user']);
@@ -63,7 +61,6 @@ export class UserComponent implements OnInit {
   }
 
   onAddSubmit(userForm) {
-console.log(userForm.userId);
     this.isSubmitted = true;
     if(this.userForm.invalid){
       return;
