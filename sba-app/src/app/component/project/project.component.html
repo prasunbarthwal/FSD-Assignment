@@ -13,38 +13,44 @@
   </div>
   </div>
   <div class="form-group row">
-      <div class="col-sm-2"></div>
-      
-      <div class="col-sm-1">
+      <div class="col-sm-2 col-md-2"></div>      
+      <div class="col-sm-2 col-md-2">
           <div class="form-check">          
-              <input class="form-check-input" type="checkbox" id="setDate" formControlName="setDate" (change)="enableDate()">
+              <input class="form-check-input" [checked]= false type="checkbox" id="setDate" formControlName="setDate" (change)="enableDate()">
 
             <label class="form-check-label" for="setDate">Set Start and End Date: </label>
          </div>
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-1 col-md-1"></div>
+
+      <div class="col-sm-2 col-md-2">
           <input matInput [matDatepicker]="startDatepicker" [readonly]=true  placeholder="Start Date:" name="startDate" formControlName="startDate" class="form-control">
           <mat-datepicker-toggle matSuffix [for]="startDatepicker"></mat-datepicker-toggle>
           <mat-datepicker #startDatepicker></mat-datepicker>
         
       </div>
-      <div class="col-sm-3">
+      <div class="col-sm-2 col-md-2">
           <input matInput [matDatepicker]="endDatepicker" [readonly]=true placeholder="End Date:" name="endDate" formControlName="endDate" class="form-control">
                 <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
                 <mat-datepicker #endDatepicker></mat-datepicker>
-       
+                <div *ngIf="isSubmitted && formControls.endDate.errors" class="help-block">
+                   
+                <div *ngIf="formControls.endDate.errors.CompareDate">End Date Must be greater than start date</div>
+
       </div>
     </div>
    
   <div class="form-group row">
     <label for="priority" class="col-sm-2 col-form-label">Priority:</label>
-    <div class="col-sm-3">
+    <div class="col-sm-2">
         <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="30" name = "priority" formControlName="priority"></mat-slider>
                 
  <div *ngIf="isSubmitted && formControls.priority.errors" class="help-block">
            <div *ngIf="formControls.priority.errors.required">Priority is required</div>
         </div>
     </div>
+    <div class="col-sm-5"></div>
+
   </div>
   <div class="form-group row">
       <label for="manager" class="col-sm-2 col-form-label">Manager</label>
@@ -54,15 +60,15 @@
 
       </div>
       <div class="col-sm-2">
-
       <button type="submit" class="btn btn-primary" (click)="searchUser()">Search</button>
 </div>
 
     </div>
     <div class="form-group row">
         <div class="col-sm-2"></div>
+        <div class="col-sm-5"></div>
 
-        <div class="col-2">
+        <div class="col-sm-1">
             <div *ngIf="!showActions">
                 <button type="submit" class="btn btn-primary">Add</button>
               </div>
@@ -72,9 +78,9 @@
   
              </div>          
           </div>
-          <div class="col-1">
+          <div class="col-sm-.5">
             </div>
-          <div class="col-2">
+          <div class="col-sm-1">
               <button type="submit" class="btn btn-primary" (click)="onClear()">Reset</button>
 
             </div>

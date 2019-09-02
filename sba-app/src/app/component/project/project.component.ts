@@ -5,6 +5,8 @@ import {NgForm,FormBuilder, FormGroup, Validators,FormControl } from  '@angular/
 import { MatDialog,MatDialogConfig } from '@angular/material';
 import { ProjectService } from '../../service/project.service';
 import { ModalComponent } from '../modal/modal.component';
+import { CompareDate } from '../../helper/compare-date.validator';
+
 
 
 @Component({
@@ -46,6 +48,8 @@ export class ProjectComponent implements OnInit {
        startDate: [{value:'', disabled:true}],
        endDate:[{value:'', disabled:true}]
  
+   },{
+    validator: CompareDate('startDate', 'endDate')
    });
   
  
