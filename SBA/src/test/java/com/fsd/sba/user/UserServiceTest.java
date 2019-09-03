@@ -58,7 +58,7 @@ public class UserServiceTest {
 
     @Test
     public void testGetUserById() {
-        User user = new User(Long.valueOf(1), "Last Name", "First Name", 1,null);
+        User user = new User(Long.valueOf(1), "Last Name", "First Name", 1,Long.valueOf(1),Long.valueOf(1));
         when(userRepository.getOne(1L)).thenReturn(user);
         UserDTO result = userService.findUser(Long.valueOf(1));
         assertEquals(Long.valueOf(1), result.getUserId());
@@ -76,7 +76,7 @@ public class UserServiceTest {
                 .firstName("First Name")
                 .lastName("Last Name")
                 .build();
-        User saved = new User(Long.valueOf(2), "Last Name", "First Name", 1,null);
+        User saved = new User(Long.valueOf(2), "Last Name", "First Name", 1,Long.valueOf(1),Long.valueOf(1));
         when(userRepository.save(user)).thenReturn(saved);
         User result = userService.saveUser(userDTO);
         assertEquals(Long.valueOf(2), result.getUserId());
@@ -90,7 +90,7 @@ public class UserServiceTest {
     public void updateUser() {
         UserDTO userDTO = new UserDTO(Long.valueOf(1), "Last Name", "First Name", 1);
         //  User user = new User(Long.valueOf(1),"Last Name","First Name",1,new Project());
-        User userExisting = new User(Long.valueOf(1), "Last Name", "First Name", 1, null);
+        User userExisting = new User(Long.valueOf(1), "Last Name", "First Name", 1, Long.valueOf(1),Long.valueOf(1));
         when(userRepository.getOne(1L)).thenReturn(userExisting);
         User user = User.builder()
                 .userId(Long.valueOf(1))
@@ -99,7 +99,7 @@ public class UserServiceTest {
                 .lastName("Last Name")
                // .projectId(null)
                 .build();
-        User saved = new User(Long.valueOf(1), "Last Name Changed", "First Name", 2,null);
+        User saved = new User(Long.valueOf(1), "Last Name Changed", "First Name", 2,Long.valueOf(1),Long.valueOf(1));
         when(userRepository.save(user)).thenReturn(saved);
         User result = userService.updateUser(userDTO);
         assertEquals(Long.valueOf(1), result.getUserId());

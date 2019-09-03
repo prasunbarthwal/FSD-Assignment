@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "tasks")
+@Entity(name = "task")
 
 public class Task implements Serializable {
 
@@ -27,8 +27,17 @@ public class Task implements Serializable {
     /*@Column(name="parent_id")
     private Long parentId;
 */
+    @Column(name = "project_id")
+    private Long projectId;
+
+    @Column(name = "parent_id")
+    private Long parentId;
+
     @Column(name = "task")
     private String task;
+
+    @Column(name = "task_status")
+    private String status;
 
     @Column(name = "start_date")
     //  @Temporal(TemporalType.DATE)
@@ -41,10 +50,10 @@ public class Task implements Serializable {
     @Column(name = "priority")
     private Integer priority;
 
-    @OneToOne(cascade = CascadeType.ALL)
+   /* @OneToOne(cascade = CascadeType.ALL)
     // @OneToOne(mappedBy = "task",cascade = CascadeType.ALL)
     @JoinColumn(name = "parent_id")
     //@ToString.Exclude
-    private ParentTask parentTask;
+    private ParentTask parentTask;*/
 
 }

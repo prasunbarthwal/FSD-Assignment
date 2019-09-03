@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,15 +35,31 @@ public class ProjectServiceImpl implements ProjectService {
     public List<ProjectDTO> findAll() {
 
         List<Project> projects = projectRepository.findAll();
+        List<ProjectDTO> projectDTOList = new ArrayList<>();
 
-        List<ProjectDTO> projectDTOList = projects.stream().map(project -> ProjectDTO.builder()
+        for (Project project:projects)
+        {
+            User user = userRepository.findByProjectId(project.getId());
+            ProjectDTO projectDTO = ProjectDTO.builder()
+                    .projectId(project.getId())
+                    .projectName(project.getProjectName())
+                    .startDate(project.getStartDate())
+                    .endDate(project.getEndDate())
+                    .priority(project.getPriority())
+                    .userId( user !=null ?user.getUserId():null)
+                    .manager(user !=null ? user.getFirstName()+user.getLastName(): String.valueOf(""))
+                    .build();
+            projectDTOList.add(projectDTO);
+        }
+
+/*        List<ProjectDTO> projectDTOList = projects.stream().map(project -> ProjectDTO.builder()
                 .projectId(project.getId())
                 .projectName(project.getProjectName())
                 .startDate(project.getStartDate())
                 .endDate(project.getEndDate())
                 .priority(project.getPriority())
                 .build()).collect(Collectors.toList());
-        return projectDTOList;
+       */ return projectDTOList;
 
     }
 
@@ -54,15 +71,15 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project saveProject(ProjectDTO projectDTO) {
 
-        UserDTO userDTO = userService.findUser(projectDTO.getUserId());
+       // UserDTO userDTO = userService.findUser(projectDTO.getUserId());
         User user = userRepository.getOne(projectDTO.getUserId());
 
         Project project = Project.builder()
                 .projectName(projectDTO.getProjectName())
                 .endDate(projectDTO.getEndDate())
                 .startDate(projectDTO.getStartDate())
-                .priority(projectDTO.getPriority())
-                .user(user).build();
+                .priority(projectDTO.getPriority()).build();
+                //.user(user).build();
              /*   .user(User.builder()
                         .empId(userDTO.getEmpId())
                         .firstName(userDTO.getFirstName())
@@ -72,6 +89,8 @@ public class ProjectServiceImpl implements ProjectService {
 
 
         project = projectRepository.save(project);
+        user.setProjectId(project.getId());
+        userRepository.save(user);
         return project;
     }
 

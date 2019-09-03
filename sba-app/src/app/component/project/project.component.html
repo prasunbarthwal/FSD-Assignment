@@ -2,7 +2,7 @@
     
     <div class="form-group row">
         <input type="text" placeholder="Project Id" formControlName="projectId" class="form-control" [hidden]="true">
-        <input type="text" placeholder="User Id" formControlName="userId" class="form-control" >
+        <input type="text" placeholder="User Id" formControlName="userId" class="form-control"  [hidden]="true">
 
           </div>
           <div class="form-group row">
@@ -58,9 +58,10 @@
   <div class="form-group row">
       <label for="manager" class="col-sm-2 col-form-label">Manager</label>
       <div class="col-sm-5">
-          <input type="text" placeholder="Select search to populate" formControlName="manager" class="form-control" >
-            <div *ngIf="isSubmitted && formControls.manager.errors" class="help-block"></div>
-
+          <input type="text" placeholder="Select search to populate" formControlName="manager" class="form-control" [readonly]=true>
+            <div *ngIf="isSubmitted && formControls.manager.errors" class="help-block">
+            <div *ngIf="formControls.manager.errors.required">Manager is required</div>
+          </div>
       </div>
       <div class="col-sm-2">
       <button class="btn btn-primary" type="button" (click)="searchUser()">Search</button>
@@ -91,6 +92,7 @@
       </div>
       
 </form>
+<div class="table-responsive">
 
 <table >
     <tbody>
@@ -107,6 +109,8 @@
     
     </tbody>
     </table>
+  </div>
+    <div class="table-responsive">
 
     <table class="table table-hover">
         <thead>
@@ -116,6 +120,10 @@
             <th scope="col">Completed </th>
             <th scope="col">Start Date </th>
             <th scope="col">End Date </th>
+            <th scope="col">Priority </th>
+            <th></th>
+            <th></th>
+
 
             
           </tr>
@@ -124,12 +132,13 @@
             
     
     
-        <tr *ngFor="let project of projects | userFilter: {firstName: projectSearch,lastName: projectSearch, empId:projectSearch}; let i = index">
+        <tr *ngFor="let project of projects | userFilter: {startDate: projectSearch,endDate: projectSearch,priority: projectSearch,projectName: projectSearch,totalTask: projectSearch, completedTask:projectSearch}; let i = index">
             <td>{{project.projectName}}</td>
             <td>{{project.totalTask}}</td>
             <td>{{project.completedTask}}</td>
             <td>{{project.startDate}}</td>
             <td>{{project.endDate}}</td>
+            <td>{{project.priority}}</td>
 
 
             <td>  
@@ -144,3 +153,5 @@
           </tr>
         </tbody>
       </table>
+      </div>
+

@@ -12,6 +12,7 @@ import { UserComponent } from './component/user/user.component';
 import {UserFilterPipe} from './filter/userFilter.pipe';
 import { ProjectComponent } from './component/project/project.component';
 import { ModalComponent } from './component/modal/modal.component';
+import { TaskComponent } from './component/task/task.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ModalComponent } from './component/modal/modal.component';
     UserComponent,
     UserFilterPipe,
     ProjectComponent,
-    ModalComponent
+    ModalComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,

@@ -43,7 +43,7 @@ public class TaskServiceImpl implements TaskService {
                 .startDate(task.isPresent() ? task.get().getStartDate() : null)
                 .task(task.isPresent() ? task.get().getTask() : null)
                 .priority(task.isPresent() ? task.get().getPriority() : null)
-                .parentTask(task.get().getParentTask() != null ? task.get().getParentTask().getParentTask() : null)
+              //  .parentTask(task.get().getParentTask() != null ? task.get().getParentTask().getParentTask() : null)
                 .build();
     }
 
@@ -59,11 +59,11 @@ public class TaskServiceImpl implements TaskService {
         oldTask.setPriority(taskDto.getPriority());
         oldTask.setEndDate(taskDto.getEndDate());
         oldTask.setStartDate(taskDto.getStartDate());
-        if (Objects.nonNull(oldTask.getParentTask()))
+       /* if (Objects.nonNull(oldTask.getParentTask()))
             oldTask.getParentTask().setParentTask(taskDto.getParentTask());
         else
             oldTask.setParentTask(ParentTask.builder().parentTask(taskDto.getParentTask()).build());
-
+*/
         return taskRepository.save(oldTask);
     }
 
@@ -76,7 +76,7 @@ public class TaskServiceImpl implements TaskService {
                 .startDate(taskDto.getStartDate())
                 .task(taskDto.getTask())
                 .priority(taskDto.getPriority())
-                .parentTask((taskDto.getParentTask() != null && taskDto.getParentTask() != "") ? ParentTask.builder().parentTask(taskDto.getParentTask()).build() : null)
+                //.parentTask((taskDto.getParentTask() != null && taskDto.getParentTask() != "") ? ParentTask.builder().parentTask(taskDto.getParentTask()).build() : null)
                 .build();
         return taskRepository.save(task);
     }

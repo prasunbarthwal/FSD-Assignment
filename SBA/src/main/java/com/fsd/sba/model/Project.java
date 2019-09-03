@@ -31,6 +31,9 @@ public class Project implements Serializable {
     @MapsId
     private User task;*/
 
+    @Column(name="project")
+    private String projectName;
+
     @Column(name = "start_date")
     //  @Temporal(TemporalType.DATE)
     private LocalDate startDate;
@@ -43,14 +46,13 @@ public class Project implements Serializable {
     private Integer priority;
 
 
-    @Column(name="project")
-    private String projectName;
-
    /* @OneToOne(cascade = CascadeType.ALL)
     // @OneToOne(mappedBy = "task",cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")*/
+/*
    @OneToOne(mappedBy = "project", cascade = CascadeType.ALL,
            fetch = FetchType.LAZY, optional = false)
     private User user;
+*/
 
 }

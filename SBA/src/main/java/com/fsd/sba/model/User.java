@@ -24,21 +24,25 @@ public class User implements Serializable {
     @Column(name = "user_id", updatable = false, nullable = false)
     private Long userId;
 
-    @Column(name = "lname")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "fname")
+    @Column(name = "first_name")
     private String firstName;
 
     @Column(name = "emp_id")
     private Integer empId;
-/*
-    @Column(name = "project_id")
-    private Integer projectId;*/
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @Column(name = "project_id")
+    private Long projectId;
+
+    @Column(name = "task_id")
+    private Long taskId;
+
+
+   /* @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "project_id")
-    private Project project;
+    private Project project;*/
    /* @OneToOne(cascade = CascadeType.ALL)
     // @OneToOne(mappedBy = "task",cascade = CascadeType.ALL)
     @JoinColumn(name = "project_id")

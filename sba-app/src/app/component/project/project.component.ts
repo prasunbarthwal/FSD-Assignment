@@ -44,7 +44,7 @@ export class ProjectComponent implements OnInit {
     //   show:[{value: false, disabled:true}],
     projectName: ['', Validators.required],
     priority: ['', Validators.required],
-       manager: [{value:''}],
+       manager: ['',Validators.required],
        startDate: [{value:'', disabled:true}],
        endDate:[{value:'', disabled:true}]
  
@@ -106,6 +106,21 @@ this.reloadComponent();
   this.projectForm.reset() // reset form to empty
   }
 
+  editProject(project:Project, i) {
+    this.projectForm.patchValue({
+      index: i,
+      projectId:project.projectId,
+      startDate:project.startDate,
+      endDate: project.endDate,
+      manager: project.manager,
+      projectName:project.projectName,
+      userId:project.userId,
+      priority:project.priority
+
+
+        })
+        this.showActions=true;
+  }
  
 
    reloadComponent() {
@@ -154,7 +169,7 @@ enableDate()
         dialogConfig.disableClose = true;
         //dialogConfig.autoFocus = true;
 
-        this.dialog.open(ModalComponent, dialogConfig);
+       // this.dialog.open(ModalComponent, dialogConfig);
         const dialogRef = this.dialog.open(ModalComponent, dialogConfig);
 
         dialogRef.afterClosed().subscribe(
