@@ -15,6 +15,10 @@ public class TaskDto {
 
     private Long id;
 
+    private Long projectId;
+
+    private String projectName;
+
     private String task;
 
     private LocalDate startDate;
@@ -23,5 +27,13 @@ public class TaskDto {
 
     private Integer priority;
 
-    private String  parentTask;
+    private String parentTask;
+
+    private Long parentTaskId;
+
+    private Long userId;
+
+    private String userName;
+
+
 }
