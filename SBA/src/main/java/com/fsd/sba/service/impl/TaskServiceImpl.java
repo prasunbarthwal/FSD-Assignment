@@ -1,6 +1,8 @@
 package com.fsd.sba.service.impl;
 
+import com.fsd.sba.dao.ParentTaskRepository;
 import com.fsd.sba.dao.TaskRepository;
+import com.fsd.sba.dao.UserRepository;
 import com.fsd.sba.dto.ProjectDTO;
 import com.fsd.sba.dto.TaskDto;
 import com.fsd.sba.model.ParentTask;
@@ -25,37 +27,86 @@ import java.util.stream.DoubleStream;
 @Slf4j
 public class TaskServiceImpl implements TaskService {
 
+
     @Autowired
     TaskRepository taskRepository;
 
+    @Autowired
+    ParentTaskRepository parentTaskRepository;
 
-    public List<TaskDto> findTaskByProject(Long id){
+    @Autowired
+    UserRepository userRepository;
 
-    List<Task> taskList = taskRepository.findTaskByProjectId(id);
+    @Override
+    public TaskDto findTask(Long id) {
+        return null;
+    }
 
-    List<TaskDto> taskDtoList = new ArrayList<>();
+    @Override
+    public void saveTask(TaskDto taskDto) {
 
-        for( Task task :taskList)
+        log.debug("Inside save Task method");
+        if (taskDto.getIsParent()) {
+            ParentTask parentTask = ParentTask.builder()
+                    .parentTask(taskDto.getParentTask()).build();
 
-    {
+            parentTaskRepository.save(parentTask);
 
-    /*{
-        User user = userRepository.findByProjectId(project.getId());
-        ProjectDTO projectDTO = ProjectDTO.builder()
-                .projectId(project.getId())
-                .projectName(project.getProjectName())
-                .startDate(project.getStartDate())
-                .endDate(project.getEndDate())
-                .priority(project.getPriority())
-                .userId( user !=null ?user.getUserId():null)
-                .manager(user !=null ? user.getFirstName()+user.getLastName(): String.valueOf(""))
-                .build();
-        projectDTOList.add(projectDTO);
-    }*/
+        } else {
+            Task task = Task.builder().endDate(taskDto.getEndDate())
+                    .startDate(taskDto.getStartDate())
+                    .task(taskDto.getTask())
+                    .priority(taskDto.getPriority())
+                    .projectId(taskDto.getProjectId())
+                    .parentId(taskDto.getParentTaskId())
+                    .build();
+            task = taskRepository.save(task);
+
+            User user = userRepository.getOne(taskDto.getUserId());
+            user.setTaskId(task.getId());
+            userRepository.save(user);
+
+        }
+
+        //save task
     }
 
 
+    @Override
+    public Task updateTask(TaskDto task) {
+        return null;
+    }
 
+    @Override
+    public Task endTask(Long id) {
+        return null;
+    }
+
+
+    public List<TaskDto> findTaskByProject(Long id) {
+
+        List<Task> taskList = taskRepository.findTaskByProjectId(id);
+
+        List<TaskDto> taskDtoList = new ArrayList<>();
+
+        for (Task task : taskList) {
+            TaskDto taskDto = TaskDto.builder()
+                    .id(task.getId())
+                    .priority(task.getPriority())
+                    .startDate(task.getStartDate())
+                    .endDate(task.getEndDate())
+                    .task(task.getTask())
+                    .parentTask("")
+                    .build();
+        }
+
+        return taskDtoList;
+
+    }
+
+}
+
+/*
     @Override
     public TaskDto findTask(Long id) {
 
@@ -70,10 +121,11 @@ public class TaskServiceImpl implements TaskService {
                 .priority(task.isPresent() ? task.get().getPriority() : null)
               //  .parentTask(task.get().getParentTask() != null ? task.get().getParentTask().getParentTask() : null)
                 .build();
-    }
+    }*/
 
 
-    @Override
+//        @Override
+/*
     public Task updateTask(TaskDto taskDto) {
 
         log.debug("Inside update Task method");
@@ -84,27 +136,16 @@ public class TaskServiceImpl implements TaskService {
         oldTask.setPriority(taskDto.getPriority());
         oldTask.setEndDate(taskDto.getEndDate());
         oldTask.setStartDate(taskDto.getStartDate());
-       /* if (Objects.nonNull(oldTask.getParentTask()))
+       */
+/* if (Objects.nonNull(oldTask.getParentTask()))
             oldTask.getParentTask().setParentTask(taskDto.getParentTask());
         else
             oldTask.setParentTask(ParentTask.builder().parentTask(taskDto.getParentTask()).build());
-*/
+*//*
+
         return taskRepository.save(oldTask);
     }
 
-    @Override
-    public Task saveTask(TaskDto taskDto) {
-
-        log.debug("Inside save Task method");
-
-        Task task = Task.builder().endDate(taskDto.getEndDate())
-                .startDate(taskDto.getStartDate())
-                .task(taskDto.getTask())
-                .priority(taskDto.getPriority())
-                //.parentTask((taskDto.getParentTask() != null && taskDto.getParentTask() != "") ? ParentTask.builder().parentTask(taskDto.getParentTask()).build() : null)
-                .build();
-        return taskRepository.save(task);
-    }
 
     @Override
     public Task endTask(Long id) {
@@ -117,6 +158,7 @@ public class TaskServiceImpl implements TaskService {
 
 
     }
+*/
 
 
-}
+

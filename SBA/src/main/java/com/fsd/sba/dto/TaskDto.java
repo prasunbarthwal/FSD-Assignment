@@ -19,6 +19,8 @@ public class TaskDto {
 
     private String projectName;
 
+    private Boolean isParent;
+
     private String task;
 
     private LocalDate startDate;

@@ -24,11 +24,11 @@ public class TaskControllerImpl implements TaskController {
     TaskService taskService;
 
 
-    @RequestMapping(value = "/tasks", method = RequestMethod.GET)
-    public ResponseEntity<List<Task>> getAllTasks() {
+    @RequestMapping(value = "/tasks/{projectId}", method = RequestMethod.GET)
+    public ResponseEntity<List<TaskDto>> getAllTasks(@PathVariable("projectId") Long projectId) {
 
         log.debug("Entered getAllTasks Request Mapping ");
-        List<Task> taskList = taskService.findAll();
+        List<TaskDto> taskList = taskService.findTaskByProject(projectId);
         return ResponseEntity.ok().body(taskList);
     }
 
@@ -45,13 +45,13 @@ public class TaskControllerImpl implements TaskController {
     public ResponseEntity<Task> addTask(@RequestBody TaskDto taskDto) {
 
         log.debug("Entered addTask Request Mapping ");
-        Task task = taskService.saveTask(taskDto);
+         taskService.saveTask(taskDto);
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/endTask/{id}", method = RequestMethod.PUT)
-    public ResponseEntity endTask(@PathVariable("id") Long id, @RequestBody Object task) {
+    public ResponseEntity endTask(@PathVariable("id") Long id) {
 
         log.debug("End Task for task Id" + id);
         taskService.endTask(id);
