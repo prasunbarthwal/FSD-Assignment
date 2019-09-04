@@ -13,7 +13,7 @@ import java.util.List;
 public interface TaskController {
 
     @RequestMapping(value = "/endTask/{id}", method = RequestMethod.PUT)
-    public ResponseEntity endTask(@PathVariable("id") Long id, @RequestBody Object task);
+    public ResponseEntity endTask(@PathVariable("id") Long id, @RequestBody TaskDto taskDto) ;
 
     @RequestMapping(value = "/updateTask", method = RequestMethod.PUT)
     public ResponseEntity updateTask(@RequestBody TaskDto taskDto);

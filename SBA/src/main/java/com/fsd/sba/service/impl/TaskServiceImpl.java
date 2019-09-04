@@ -1,6 +1,7 @@
 package com.fsd.sba.service.impl;
 
 import com.fsd.sba.dao.ParentTaskRepository;
+import com.fsd.sba.dao.ProjectRepository;
 import com.fsd.sba.dao.TaskRepository;
 import com.fsd.sba.dao.UserRepository;
 import com.fsd.sba.dto.ProjectDTO;
@@ -37,11 +38,39 @@ public class TaskServiceImpl implements TaskService {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    ProjectRepository projectRepository;
+
+
     @Override
     public TaskDto findTask(Long id) {
-        return null;
-    }
 
+        log.debug("Inside find Task method");
+        Task task = taskRepository.getOne(id);
+        ParentTask parentTask = null;
+        Project project = null;
+        User user = null;
+        if(Objects.nonNull(task.getParentId()))
+            parentTask  = parentTaskRepository.getOne(task.getParentId());
+        if(Objects.nonNull(task.getProjectId()))
+            project = projectRepository.getOne(task.getProjectId());
+
+        user = userRepository.findByTaskId(task.getId());
+
+            log.debug("Task found for id " + id);
+        return TaskDto.builder()
+                .id(task.getId())
+                .endDate(task.getEndDate())
+                .startDate(task.getStartDate())
+                .task(task.getTask())
+                .priority(task.getPriority())
+                .parentTask(Objects.nonNull(parentTask)? parentTask.getParentTask():"")
+                .projectId(task.getProjectId())
+                .projectName(Objects.nonNull(project)? project.getProjectName():"")
+                .isParent(false)
+                //  .parentTask(task.get().getParentTask() != null ? task.get().getParentTask().getParentTask() : null)
+                .build();
+    }
     @Override
     public void saveTask(TaskDto taskDto) {
 
@@ -79,7 +108,9 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task endTask(Long id) {
-        return null;
+       Task task =  taskRepository.getOne(id);
+       task.setStatus("COMPLETED");
+       return taskRepository.save(task);
     }
 
 

@@ -51,7 +51,7 @@ public class TaskControllerImpl implements TaskController {
     }
 
     @RequestMapping(value = "/endTask/{id}", method = RequestMethod.PUT)
-    public ResponseEntity endTask(@PathVariable("id") Long id) {
+    public ResponseEntity endTask(@PathVariable("id") Long id, @RequestBody TaskDto taskDto) {
 
         log.debug("End Task for task Id" + id);
         taskService.endTask(id);
