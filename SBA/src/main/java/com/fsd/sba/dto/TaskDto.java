@@ -13,7 +13,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class TaskDto {
 
-    private Long id;
+    private Long taskId;
 
     private Long projectId;
 

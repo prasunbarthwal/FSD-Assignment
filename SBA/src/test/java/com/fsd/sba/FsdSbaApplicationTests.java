@@ -85,14 +85,14 @@ public class FsdSbaApplicationTests {
     public void saveTaskTest() {
         // given
         User task = new User();
-        //task.setId(Long.getLong("3"));
+        //task.setTaskId(Long.getLong("3"));
         task.setTask("TestTask");
         task.setPriority(10);
 
         task = taskRepository.save(task);
 
         // when
-        User found = taskRepository.findById(task.getId()).get();
+        User found = taskRepository.findById(task.getTaskId()).get();
 
         assertNotNull(found);
 

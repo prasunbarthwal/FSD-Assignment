@@ -4,7 +4,6 @@ import com.fsd.sba.dao.ParentTaskRepository;
 import com.fsd.sba.dao.ProjectRepository;
 import com.fsd.sba.dao.TaskRepository;
 import com.fsd.sba.dao.UserRepository;
-import com.fsd.sba.dto.ProjectDTO;
 import com.fsd.sba.dto.TaskDto;
 import com.fsd.sba.model.ParentTask;
 import com.fsd.sba.model.Project;
@@ -16,12 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.stream.DoubleStream;
 
 @Service
 @Transactional
@@ -57,9 +53,9 @@ public class TaskServiceImpl implements TaskService {
 
         user = userRepository.findByTaskId(task.getId());
 
-            log.debug("Task found for id " + id);
+            log.debug("Task found for taskId " + id);
         return TaskDto.builder()
-                .id(task.getId())
+                .taskId(task.getId())
                 .endDate(task.getEndDate())
                 .startDate(task.getStartDate())
                 .task(task.getTask())
@@ -122,13 +118,14 @@ public class TaskServiceImpl implements TaskService {
 
         for (Task task : taskList) {
             TaskDto taskDto = TaskDto.builder()
-                    .id(task.getId())
+                    .taskId(task.getId())
                     .priority(task.getPriority())
                     .startDate(task.getStartDate())
                     .endDate(task.getEndDate())
                     .task(task.getTask())
                     .parentTask("")
                     .build();
+            taskDtoList.add(taskDto);
         }
 
         return taskDtoList;
@@ -139,13 +136,13 @@ public class TaskServiceImpl implements TaskService {
 
 /*
     @Override
-    public TaskDto findTask(Long id) {
+    public TaskDto findTask(Long taskId) {
 
         log.debug("Inside find Task method");
-        Optional<Task> task = taskRepository.findById(id);
-        log.debug("Task found for id " + id);
+        Optional<Task> task = taskRepository.findById(taskId);
+        log.debug("Task found for taskId " + taskId);
         return TaskDto.builder()
-                .id(task.get().getId())
+                .taskId(task.get().getTaskId())
                 .endDate(task.isPresent() ? task.get().getEndDate() : null)
                 .startDate(task.isPresent() ? task.get().getStartDate() : null)
                 .task(task.isPresent() ? task.get().getTask() : null)
@@ -160,9 +157,9 @@ public class TaskServiceImpl implements TaskService {
     public Task updateTask(TaskDto taskDto) {
 
         log.debug("Inside update Task method");
-        Optional<Task> task = taskRepository.findById(taskDto.getId());
+        Optional<Task> task = taskRepository.findById(taskDto.getTaskId());
         Task oldTask = task.get();
-        log.debug("Found task for update with id" +task);
+        log.debug("Found task for update with taskId" +task);
         oldTask.setTask(taskDto.getTask());
         oldTask.setPriority(taskDto.getPriority());
         oldTask.setEndDate(taskDto.getEndDate());
@@ -179,12 +176,12 @@ public class TaskServiceImpl implements TaskService {
 
 
     @Override
-    public Task endTask(Long id) {
+    public Task endTask(Long taskId) {
 
         log.debug("Inside end Task method");
-        Optional<Task> task = taskRepository.findById(id);
+        Optional<Task> task = taskRepository.findById(taskId);
         task.get().setEndDate(LocalDate.now());
-        log.debug("Task ended for Id" + id);
+        log.debug("Task ended for Id" + taskId);
         return taskRepository.save(task.get());
 
 

@@ -64,7 +64,7 @@ public class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"firstName\" : \"First\", \"lastName\" : \"last\" , \"empId\" : 15}")
                 .accept(MediaType.APPLICATION_JSON))
-                /*.andExpect(jsonPath("$.id").exists())
+                /*.andExpect(jsonPath("$.taskId").exists())
                 .andExpect(jsonPath("$.text").exists())
                 .andExpect(jsonPath("$.completed").exists())
                 .andExpect(jsonPath("$.text").value("New ToDo Sample"))

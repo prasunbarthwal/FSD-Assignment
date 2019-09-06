@@ -1,0 +1,55 @@
+
+   
+  
+    <h2 mat-dialog-title>Search Project</h2>
+
+    <!-- ><mat-dialog-content [formGroup]="form"><mat-form-field>
+            <input matInput
+                    placeholder="Course Description"
+                   formControlName="description">
+        </mat-form-field>-->
+        <mat-dialog-content>
+          
+            <table >
+                <tbody>
+                <tr>
+                    <td> <input [(ngModel)]="projectSearch" placeholder="Search..." class="advancedSearchTextbox">
+                    </td>
+                </tr>
+                
+                </tbody>
+                </table>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+    
+                <th scope="col">Project</th>
+        </tr>
+            </thead>
+            <tbody> 
+        
+        
+            <tr *ngFor="let project of projects | userFilter: {projectName: projectSearch};let i = index;">
+                <td>{{project.projectName}}</td>
+               
+                <td>  
+                    <button class="btn btn-primary" (click)="selectProject(project,i)" > Select </button>                 
+                      
+                    </td>
+                </tr>
+                </tbody>
+                </table>
+       
+          ....
+     
+    </mat-dialog-content>
+    
+    
+    <mat-dialog-actions>
+      <!--<button mat-button type="button" mat-dialog-close>Cancel</button>-->  
+      <button class="mat-raised-button"  (click)="close()" >Close</button>
+      <!--<button class="mat-raised-button"  (click)="save()" >Save</button>-->
+    
+    
+    
+    </mat-dialog-actions>

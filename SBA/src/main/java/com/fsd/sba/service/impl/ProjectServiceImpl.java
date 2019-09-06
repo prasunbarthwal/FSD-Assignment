@@ -53,7 +53,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
 
 /*        List<ProjectDTO> projectDTOList = projects.stream().map(project -> ProjectDTO.builder()
-                .projectId(project.getId())
+                .projectId(project.getTaskId())
                 .projectName(project.getProjectName())
                 .startDate(project.getStartDate())
                 .endDate(project.getEndDate())

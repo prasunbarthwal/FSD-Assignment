@@ -14,6 +14,7 @@ import { ProjectComponent } from './component/project/project.component';
 import { ModalComponent } from './component/modal/modal.component';
 import { TaskComponent } from './component/task/task.component';
 import { TaskViewComponent } from './component/task-view/task-view.component';
+import { ModalProjectComponent } from './component/modal-project/modal-project.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TaskViewComponent } from './component/task-view/task-view.component';
     ProjectComponent,
     ModalComponent,
     TaskComponent,
-    TaskViewComponent
+    TaskViewComponent,
+    ModalProjectComponent
   ],
   imports: [
     BrowserModule,
@@ -35,7 +37,7 @@ import { TaskViewComponent } from './component/task-view/task-view.component';
     HttpClientModule,
     MaterialModule
   ],
-  entryComponents: [ModalComponent]
+  entryComponents: [ModalComponent,ModalProjectComponent]
 ,
   providers: [],
   bootstrap: [AppComponent]

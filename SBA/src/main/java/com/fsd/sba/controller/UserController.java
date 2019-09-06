@@ -11,8 +11,8 @@ import java.util.List;
 
 public interface UserController {
 
-    /*@RequestMapping(value = "/delUser/{id}", method = RequestMethod.PUT)
-    public ResponseEntity delUser(@PathVariable("id") Long id, @RequestBody UserDTO userDTO) ;
+    /*@RequestMapping(value = "/delUser/{taskId}", method = RequestMethod.PUT)
+    public ResponseEntity delUser(@PathVariable("taskId") Long taskId, @RequestBody UserDTO userDTO) ;
 */
     @RequestMapping(value = "/updateUser", method = RequestMethod.PUT)
     public ResponseEntity updateUser(@RequestBody UserDTO userDTO) ;
@@ -20,8 +20,8 @@ public interface UserController {
     @RequestMapping(value = "/user", method = RequestMethod.POST)
     public ResponseEntity<UserDTO> addUser(@RequestBody UserDTO userDTO) ;
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public ResponseEntity<UserDTO> getUser(@PathVariable("id") Long id) ;
+    @RequestMapping(value = "/user/{taskId}", method = RequestMethod.GET)
+    public ResponseEntity<UserDTO> getUser(@PathVariable("taskId") Long id) ;
 
     @RequestMapping(value = "/users", method = RequestMethod.GET)
     public ResponseEntity <List<UserDTO>> getAllUsers() ;

@@ -16,7 +16,7 @@ public interface UserService {
      User updateUser(UserDTO userDTO);
 
 /*
-     void delUser(Long id);
+     void delUser(Long taskId);
 */
 
 }

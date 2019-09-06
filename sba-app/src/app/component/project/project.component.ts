@@ -49,7 +49,6 @@ export class ProjectComponent implements OnInit {
        endDate:[{value:'', disabled:true}]
  
    });
-  
  
    }
    get formControls() { return this.projectForm.controls; }

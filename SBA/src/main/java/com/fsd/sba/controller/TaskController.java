@@ -12,8 +12,8 @@ import java.util.List;
 
 public interface TaskController {
 
-    @RequestMapping(value = "/endTask/{id}", method = RequestMethod.PUT)
-    public ResponseEntity endTask(@PathVariable("id") Long id, @RequestBody TaskDto taskDto) ;
+    @RequestMapping(value = "/endTask/{taskId}", method = RequestMethod.PUT)
+    public ResponseEntity endTask(@PathVariable("taskId") Long id, @RequestBody TaskDto taskDto) ;
 
     @RequestMapping(value = "/updateTask", method = RequestMethod.PUT)
     public ResponseEntity updateTask(@RequestBody TaskDto taskDto);
@@ -21,8 +21,8 @@ public interface TaskController {
     @RequestMapping(value = "/task", method = RequestMethod.POST)
     public ResponseEntity<Task> addTask(@RequestBody TaskDto taskDto);
 
-    @RequestMapping(value = "/task/{id}", method = RequestMethod.GET)
-    public ResponseEntity<TaskDto> getTask(@PathVariable("id") Long id);
+    @RequestMapping(value = "/task/{taskId}", method = RequestMethod.GET)
+    public ResponseEntity<TaskDto> getTask(@PathVariable("taskId") Long id);
 
     @RequestMapping(value = "/tasks/{projectId}", method = RequestMethod.GET)
     public ResponseEntity<List<TaskDto>> getAllTasks(@PathVariable("projectId") Long projectId);

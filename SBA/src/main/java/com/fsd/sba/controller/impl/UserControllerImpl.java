@@ -20,8 +20,8 @@ public class UserControllerImpl implements UserController {
     @Autowired
     UserService userService;
 
-    /*@RequestMapping(value = "/delUser/{id}", method = RequestMethod.PUT)
-    public ResponseEntity delUser(@PathVariable("id") Long id, @RequestBody UserDTO userDTO)
+    /*@RequestMapping(value = "/delUser/{taskId}", method = RequestMethod.PUT)
+    public ResponseEntity delUser(@PathVariable("taskId") Long taskId, @RequestBody UserDTO userDTO)
     {
         return null;
     }*/
@@ -40,8 +40,8 @@ public class UserControllerImpl implements UserController {
     }
 
 
-    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
-    public ResponseEntity<UserDTO> getUser(@PathVariable("id") Long id) {
+    @RequestMapping(value = "/user/{taskId}", method = RequestMethod.GET)
+    public ResponseEntity<UserDTO> getUser(@PathVariable("taskId") Long id) {
         UserDTO user = userService.findUser(id);
         return ResponseEntity.ok().body(user);
 

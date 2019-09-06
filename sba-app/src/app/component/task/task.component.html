@@ -1,3 +1,53 @@
-<p>
-  task works!
-</p>
+<form [formGroup]="taskForm" class="form form-register" (ngSubmit)="onAddSubmit(projectForm)" >
+    
+    <div class="form-group row">
+        <input type="text" placeholder="Project Id" formControlName="projectId" class="form-control" [hidden]="true">
+
+          </div>
+          <div class="form-group row">
+              <label for="projectName" class="col-sm-2 col-form-label">Project:</label>
+              <div class="col-sm-5">
+                  <input type="text" placeholder="Project is mandatory" formControlName="projectName" class="form-control" [readonly]=true >
+                  <div *ngIf="isSubmitted && formControls.projectName.errors" class="help-block">
+                      <div *ngIf="formControls.projectName.errors.required" >Project is required </div>
+              </div>
+            </div>
+            <div class="col-sm-2">
+                <button class="btn btn-primary" type="button" (click)="searchProject()">Search</button>
+          </div>
+            </div>
+</form>
+<table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Task</th>
+        <th scope="col">Parent </th>
+        <th scope="col">Priority</th>
+        <th scope="col">Start</th>
+        <th scope="col">End</th>
+
+      </tr>
+    </thead>
+    <tbody>
+        
+
+
+    <tr *ngFor="let task of tasks; let i = index">
+        <td>{{task.task}}</td>
+        <td>{{task.parentTask}}</td>
+        <td>{{task.priority}}</td>
+        <td>{{task.startDate}}</td>
+        <td>{{task.endDate}}</td>
+
+        <td>  
+          <button class="btn btn-primary" (click)="editTask(task,i)" > Edit </button>                 
+            
+          </td>
+          <td><button class="btn btn-primary" (click)="endTask(task,i)"> End Task </button>
+          
+        </td>
+       
+
+      </tr>
+    </tbody>
+  </table>
