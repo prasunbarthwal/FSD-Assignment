@@ -10,6 +10,7 @@ import { FooterComponent } from './component/footer/footer.component';
 import { HeaderComponent } from './component/header/header.component';
 import { UserComponent } from './component/user/user.component';
 import {UserFilterPipe} from './filter/userFilter.pipe';
+import {OrderByPipe} from './filter/orderBy.pipe';
 import { ProjectComponent } from './component/project/project.component';
 import { ModalComponent } from './component/modal/modal.component';
 import { TaskComponent } from './component/task/task.component';
@@ -23,6 +24,7 @@ import { ModalProjectComponent } from './component/modal-project/modal-project.c
     HeaderComponent,
     UserComponent,
     UserFilterPipe,
+    OrderByPipe,
     ProjectComponent,
     ModalComponent,
     TaskComponent,

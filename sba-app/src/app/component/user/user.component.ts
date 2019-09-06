@@ -19,9 +19,16 @@ export class UserComponent implements OnInit {
   isSubmitted  =  false;
   showActions: boolean = false;  
   order:boolean = false;
-  isDesc:boolean = false;
+  isDesc:boolean = true;
+  column:string;
 
-
+  direction: number;
+  // Change sort function to this: 
+  sort(property){
+      this.isDesc = !this.isDesc; //change the direction    
+      this.column = property;
+      this.direction = this.isDesc ? 1 : -1;
+  }
 
 
   constructor(private userService: UserService, private router: Router, private formBuilder: FormBuilder ) { }

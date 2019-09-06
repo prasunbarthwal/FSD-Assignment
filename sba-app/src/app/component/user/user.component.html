@@ -60,13 +60,13 @@
 </form>
 <table >
     <tbody>
-    <tr>
+    <tr><td></td>
         <td> <input [(ngModel)]="userSearch" placeholder="Search..." class="advancedSearchTextbox">
         </td>
-        <td>Sort :</td>
-        <td>  <button (click)="sortFName()">First Name </button>  </td>
-        <td>  <button (click)="sortLName()">Last Name </button>  </td>
-        <td>  <button (click)="sortEmpId()">Id </button> 
+        <td>Sort By :</td>
+        <td>  <button class="btn btn-primary" (click)="sort('firstName')">First Name </button>  </td>
+        <td>  <button class="btn btn-primary" (click)="sort('lastName')">Last Name </button>  </td>
+        <td>  <button class="btn btn-primary" (click)="sort('empId')">Id </button> 
     </tr>
     
     </tbody>
@@ -84,7 +84,7 @@
         
 
 
-    <tr *ngFor="let user of users | userFilter: {firstName: userSearch,lastName: userSearch, empId:userSearch}; let i = index">
+    <tr *ngFor="let user of users | userFilter: {firstName: userSearch,lastName: userSearch, empId:userSearch} | orderBy: {property: column, direction: direction}; let i = index">
         <td>{{user.firstName}}</td>
         <td>{{user.lastName}}</td>
         <td>{{user.empId}}</td>

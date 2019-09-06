@@ -27,9 +27,10 @@ export class TaskComponent implements OnInit {
    isSubmitted  =  false;
    showActions: boolean = false;  
    order:boolean = false;
-   isDesc:boolean = false;
- 
- 
+   isDesc:boolean = true;  
+   column:string; 
+   direction: number;
+  
  
  
    constructor(private taskService: TaskService,private router: Router, private formBuilder: FormBuilder ,
@@ -52,6 +53,14 @@ export class TaskComponent implements OnInit {
     }
     get formControls() { return this.taskForm.controls; }
 
+    sort(property){
+      this.isDesc = !this.isDesc; //change the direction    
+      this.column = property;
+      this.direction = this.isDesc ? 1 : -1;
+  }
+
+
+   
     searchProject()
     {
       //this.modalRef = this.dialog.open(ModalComponent,{hasBackdrop:false , width:"100",height:"50"});
