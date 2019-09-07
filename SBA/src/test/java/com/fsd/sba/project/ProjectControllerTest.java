@@ -6,7 +6,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fsd.sba.FsdSbaApplication;
+import com.fsd.sba.dto.ProjectDTO;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -22,6 +24,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.time.LocalDate;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = FsdSbaApplication.class)
@@ -32,6 +36,10 @@ public class ProjectControllerTest {
 
     @Autowired
     private WebApplicationContext wac;
+
+    @Autowired
+    private ObjectMapper objectMapper;
+
 
     @Before
     public void setup() {
@@ -47,6 +55,34 @@ public class ProjectControllerTest {
                 .andExpect(status().is(200));
 
 
+    }
+    @Test
+    public void verifySaveProject() throws Exception {
+        LocalDate startDate = LocalDate.now();
+        LocalDate endDate = LocalDate.now();
+        mockMvc.perform(MockMvcRequestBuilders.post("/fsd/project")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"projectName\" : \"Project test\" , \"userId\" : 1,\"priority\" : 15}")
+                .accept(MediaType.APPLICATION_JSON))
+               // .andExpect(jsonPath("$.projectId").exists())
+                //.andExpect(jsonPath("$.projectName").exists())
+              //  .andExpect(jsonPath("$.text").value("New ToDo Sample"))
+                //.andExpect(jsonPath("$.completed").value(false))*//*
+                .andDo(print())
+                .andExpect(status().isCreated())
+        ;
+    }
+
+    @Test
+    public void verifyUpdateProject() throws Exception {
+        ProjectDTO projectDTO = new ProjectDTO(Long.valueOf(1), "Test Project", "Test Manager", Long.valueOf(1), 1, 3, 2, LocalDate.now(), LocalDate.now());
+
+        mockMvc.perform(MockMvcRequestBuilders.put("/fsd/updateProject")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(projectDTO))
+                .accept(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
    /* @Test
