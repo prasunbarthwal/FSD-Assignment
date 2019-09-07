@@ -11,6 +11,7 @@ import {Project} from '../../model/project';
 
 
 
+
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -84,15 +85,17 @@ export class TaskComponent implements OnInit {
               })
               
       ); 
-      dialogRef.afterClosed()   
-     // alert (this.taskForm.projectId);
-      this.taskService.getTaskList(1).subscribe(taskList =>
-      this.tasks = taskList);
-      alert(this.tasks[0]);
-        
+      const sub = dialogRef.componentInstance.onAdd.subscribe(data => {
+       this.closed(data.projectId);
+      });
       
     }
 
+ closed(id){
+    this.taskService.getTaskList(id).subscribe(taskList =>
+      this.tasks = taskList);
+     // alert(this.tasks[0]);
+    } 
     endTask(task: Task): void {
 
       this.taskService.endTask(task.taskId.toString(),task)

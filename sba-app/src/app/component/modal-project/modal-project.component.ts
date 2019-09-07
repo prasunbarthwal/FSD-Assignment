@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,EventEmitter } from '@angular/core';
 import { ProjectService } from '../../service/project.service';
 import {Project} from '../../model/project';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material";
@@ -53,8 +53,12 @@ export class ModalProjectComponent implements OnInit {
         });
         
 this.save();
+
         
   }
+
+  onAdd = new EventEmitter();
+
 
   close()
   {
@@ -67,6 +71,7 @@ this.save();
   {     console.log("inside project modal save");
 
     this.dialogRef.close(this.form.value);
+    this.onAdd.emit(this.form.value);
 
   }
 

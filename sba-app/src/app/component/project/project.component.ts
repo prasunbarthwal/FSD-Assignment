@@ -106,6 +106,8 @@ this.reloadComponent();
   this.projectForm.reset() // reset form to empty
   }
 
+
+  
   editProject(project:Project, i) {
     this.projectForm.patchValue({
       index: i,
