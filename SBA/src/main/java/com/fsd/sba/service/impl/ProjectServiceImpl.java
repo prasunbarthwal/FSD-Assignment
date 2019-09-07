@@ -1,10 +1,12 @@
 package com.fsd.sba.service.impl;
 
 import com.fsd.sba.dao.ProjectRepository;
+import com.fsd.sba.dao.TaskRepository;
 import com.fsd.sba.dao.UserRepository;
 import com.fsd.sba.dto.ProjectDTO;
 import com.fsd.sba.dto.UserDTO;
 import com.fsd.sba.model.Project;
+import com.fsd.sba.model.Task;
 import com.fsd.sba.model.User;
 import com.fsd.sba.service.ProjectService;
 import com.fsd.sba.service.UserService;
@@ -15,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +32,9 @@ public class ProjectServiceImpl implements ProjectService {
     UserRepository userRepository;
 
     @Autowired
+    TaskRepository taskRepository;
+
+    @Autowired
     UserService userService;
 
     @Override
@@ -39,6 +45,8 @@ public class ProjectServiceImpl implements ProjectService {
 
         for (Project project : projects) {
             User user = userRepository.findByProjectId(project.getId());
+            List<Task> totalTask = taskRepository.findTaskByProjectId(project.getId());
+            List<Task> completedTask = taskRepository.findTaskByProjectIdAndStatus(project.getId(),"COMPLETED");
             ProjectDTO projectDTO = ProjectDTO.builder()
                     .projectId(project.getId())
                     .projectName(project.getProjectName())
@@ -47,6 +55,8 @@ public class ProjectServiceImpl implements ProjectService {
                     .priority(project.getPriority())
                     .userId(user != null ? user.getUserId() : null)
                     .manager(user != null ? user.getFirstName() + user.getLastName() : String.valueOf(""))
+                    .totalTask(Objects.nonNull(totalTask)?totalTask.size():0)
+                    .completedTask(Objects.nonNull(completedTask)?completedTask.size():0)
                     .build();
             projectDTOList.add(projectDTO);
         }

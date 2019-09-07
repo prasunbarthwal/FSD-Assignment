@@ -23,9 +23,9 @@ public class ProjectDTO {
 
     private Integer priority;
 
-    /*private Integer totalTask;
+    private Integer totalTask;
 
-    private Integer completedTask;*/
+    private Integer completedTask;
 
     private LocalDate startDate;
 

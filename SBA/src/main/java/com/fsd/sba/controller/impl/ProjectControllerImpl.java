@@ -40,10 +40,10 @@ public class ProjectControllerImpl implements ProjectController {
         HttpHeaders headers = new HttpHeaders();
         return new ResponseEntity<>(headers, HttpStatus.CREATED);    }
 
-    @Override
+    /*@Override
     public ResponseEntity<UserDTO> getProject(Long id) {
         return null;
-    }
+    }*/
 
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
 

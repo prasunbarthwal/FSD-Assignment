@@ -19,9 +19,9 @@ public interface ProjectController {
     @RequestMapping(value = "/project", method = RequestMethod.POST)
     public ResponseEntity<ProjectDTO> addProject(@RequestBody ProjectDTO projectDTO ) ;
 
-    @RequestMapping(value = "/project/{taskId}", method = RequestMethod.GET)
+   /* @RequestMapping(value = "/project/{taskId}", method = RequestMethod.GET)
     public ResponseEntity<UserDTO> getProject(@PathVariable("taskId") Long id) ;
-
+*/
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
     public ResponseEntity <List<ProjectDTO>> getAllProjects() ;
 }

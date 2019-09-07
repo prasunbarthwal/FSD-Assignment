@@ -159,13 +159,16 @@ public class TaskServiceImpl implements TaskService {
         List<TaskDto> taskDtoList = new ArrayList<>();
 
         for (Task task : taskList) {
+            ParentTask parentTask = null;
+            if(Objects.nonNull(task.getParentId()))
+                parentTask = parentTaskRepository.getOne(task.getParentId());
             TaskDto taskDto = TaskDto.builder()
                     .taskId(task.getId())
                     .priority(task.getPriority())
                     .startDate(task.getStartDate())
                     .endDate(task.getEndDate())
                     .task(task.getTask())
-                    .parentTask("")
+                    .parentTask(Objects.nonNull(parentTask)?parentTask.getParentTask():"")
                     .build();
             taskDtoList.add(taskDto);
         }
