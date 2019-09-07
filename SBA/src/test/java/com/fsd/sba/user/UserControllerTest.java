@@ -50,8 +50,8 @@ public class UserControllerTest {
 
     @Test
     public void verifyUserById() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/fsd/user/3").accept(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.userId").value(3))
+        mockMvc.perform(MockMvcRequestBuilders.get("/fsd/user/1").accept(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$.userId").value(1))
                 .andExpect(jsonPath("$.firstName").exists())
                 .andExpect(jsonPath("$.lastName").exists())
                 .andExpect(jsonPath("$.empId").exists())
