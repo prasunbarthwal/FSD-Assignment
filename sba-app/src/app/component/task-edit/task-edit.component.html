@@ -1,15 +1,11 @@
-<form [formGroup]="addTaskForm" class="form form-register"  (ngSubmit)="onSubmit(addTaskForm)">
+<form [formGroup]="myform" class="form form-register" (ngSubmit)="onSubmit()">
     
     <div class="form-group row">
+        <input type="text"  formControlName="projectId" class="form-control" [hidden]="true">
+        <input type="text"  formControlName="userId" class="form-control" [hidden]="true">
 
-        <input type="text" placeholder="Project Id" formControlName="projectId" class="form-control" [hidden]="true">
-        <input type="text" placeholder="Project Id" formControlName="userId" class="form-control" [hidden]="true">
-
-        <input type="text" placeholder="Project Id" formControlName="parentTaskId" class="form-control" [hidden]="true">
-
-
-
-          </div>
+        <input type="text" placeholder="Parent Id" formControlName="parentTaskId" class="form-control" [hidden]="true">
+    </div>
           <div class="form-group row">
               <label for="projectName" class="col-sm-2 col-form-label">Project:</label>
               <div class="col-sm-4">
@@ -19,7 +15,7 @@
               </div>
             </div>
             <div class="col-sm-1">
-                <button class="btn btn-primary" type="button" (click)="searchProject()">Search</button>
+                <button class="btn btn-primary" type="button" disabled (click)="searchProject()">Search</button>
           </div>
           </div>
            
@@ -37,7 +33,7 @@
                 <div class="col-sm-2">
                 </div>
             <div class="form-check col-sm-1" >          
-                <input class="form-check-input" [checked]= false type="checkbox" id="isParent" formControlName="isParent" (change)="disableFields()">
+                <input class="form-check-input" disabled type="checkbox" id="isParent" formControlName="isParent" (change)="disableFields()">
                 <label class="form-check-label " for="isParent">Parent Task: </label>
 
               </div>
@@ -95,7 +91,7 @@
                     
               </div>
               <div class="col-sm-1">
-                  <button class="btn btn-primary" type="button" [disabled]='checkPolicy' (click)="searchUser()">Search</button>
+                  <button class="btn btn-primary" type="button"  (click)="searchUser()">Search</button>
             </div>
             </div>
             <div class="form-group row">
@@ -103,19 +99,17 @@
                 <div class="col-sm-3"></div>
         
                 <div class="col-sm-1">
-                    <div *ngIf="!showActions">
-                        <button type="submit" class="btn btn-primary">Add Task</button>
-                      </div>
-                     <div *ngIf="showActions">
-              <button type="submit" class="btn btn-primary">Update</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+                <div class="col-sm-1">
+
+              <button type="button" (click)="cancel()" class="btn btn-primary">Cancel</button>
         
           
-                     </div>          
                   </div>
                   <div class="col-sm-.5">
                     </div>
                   <div class="col-sm-1">
-                      <button type="submit" class="btn btn-primary" (click)="onClear()">Reset</button>
         
                     </div>
                 

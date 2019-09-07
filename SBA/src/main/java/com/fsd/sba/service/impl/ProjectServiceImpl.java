@@ -37,8 +37,7 @@ public class ProjectServiceImpl implements ProjectService {
         List<Project> projects = projectRepository.findAll();
         List<ProjectDTO> projectDTOList = new ArrayList<>();
 
-        for (Project project:projects)
-        {
+        for (Project project : projects) {
             User user = userRepository.findByProjectId(project.getId());
             ProjectDTO projectDTO = ProjectDTO.builder()
                     .projectId(project.getId())
@@ -46,8 +45,8 @@ public class ProjectServiceImpl implements ProjectService {
                     .startDate(project.getStartDate())
                     .endDate(project.getEndDate())
                     .priority(project.getPriority())
-                    .userId( user !=null ?user.getUserId():null)
-                    .manager(user !=null ? user.getFirstName()+user.getLastName(): String.valueOf(""))
+                    .userId(user != null ? user.getUserId() : null)
+                    .manager(user != null ? user.getFirstName() + user.getLastName() : String.valueOf(""))
                     .build();
             projectDTOList.add(projectDTO);
         }
@@ -59,7 +58,8 @@ public class ProjectServiceImpl implements ProjectService {
                 .endDate(project.getEndDate())
                 .priority(project.getPriority())
                 .build()).collect(Collectors.toList());
-       */ return projectDTOList;
+       */
+        return projectDTOList;
 
     }
 
@@ -71,7 +71,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project saveProject(ProjectDTO projectDTO) {
 
-       // UserDTO userDTO = userService.findUser(projectDTO.getUserId());
+        // UserDTO userDTO = userService.findUser(projectDTO.getUserId());
         User user = userRepository.getOne(projectDTO.getUserId());
 
         Project project = Project.builder()
@@ -79,7 +79,7 @@ public class ProjectServiceImpl implements ProjectService {
                 .endDate(projectDTO.getEndDate())
                 .startDate(projectDTO.getStartDate())
                 .priority(projectDTO.getPriority()).build();
-                //.user(user).build();
+        //.user(user).build();
              /*   .user(User.builder()
                         .empId(userDTO.getEmpId())
                         .firstName(userDTO.getFirstName())
@@ -95,18 +95,25 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project updateProject(ProjectDTO userDTO) {
-        return null;
+    public Project updateProject(ProjectDTO projectDTO) {
+
+        Project project = projectRepository.getOne(projectDTO.getProjectId());
+
+        project.setEndDate(projectDTO.getEndDate());
+        project.setPriority(projectDTO.getPriority());
+        project.setProjectName(projectDTO.getProjectName());
+        project.setStartDate(projectDTO.getStartDate());
+        return projectRepository.save(project);
+
     }
 
 
-   User buildUserObject (UserDTO userDTO)
-    {
-        return      User.builder()
-                        .empId(userDTO.getEmpId())
-                        .firstName(userDTO.getFirstName())
-                        .lastName(userDTO.getLastName())
-                        .userId(userDTO.getUserId())
-                        .build();
+    User buildUserObject(UserDTO userDTO) {
+        return User.builder()
+                .empId(userDTO.getEmpId())
+                .firstName(userDTO.getFirstName())
+                .lastName(userDTO.getLastName())
+                .userId(userDTO.getUserId())
+                .build();
     }
 }

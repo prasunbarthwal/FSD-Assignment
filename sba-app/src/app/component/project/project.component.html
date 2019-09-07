@@ -99,13 +99,14 @@
     <tr>
         <td> <input [(ngModel)]="projectSearch" placeholder="Search..." class="advancedSearchTextbox">
         </td>
-        <td>Sort :</td>
-        <td>  <button (click)="sortStartDate()">Start Date </button>  </td>
-        <td>  <button (click)="sortEndDate()">End Date </button>  </td>
-        <td>  <button (click)="sortPriority()">Priority </button> 
-          <td>  <button (click)="sortCompleted()">Completed </button> 
-
-    </tr>
+     </tr>
+     <tr>
+        <td>Sort By :</td>
+        <td>  <button class="btn btn-primary" (click)="sort('startDate')">Start Date </button>  </td>
+        <td>  <button class="btn btn-primary" (click)="sort('endDate')">End Date </button>  </td>
+        <td>  <button class="btn btn-primary" (click)="sort('priority')">Priority </button> 
+          <td>  <button class="btn btn-primary" (click)="sort('completedTask')">Completed </button> 
+     </tr>
     
     </tbody>
     </table>
@@ -132,7 +133,7 @@
             
     
     
-        <tr *ngFor="let project of projects | userFilter: {startDate: projectSearch,endDate: projectSearch,priority: projectSearch,projectName: projectSearch,totalTask: projectSearch, completedTask:projectSearch}; let i = index">
+        <tr *ngFor="let project of projects | userFilter: {startDate: projectSearch,endDate: projectSearch,priority: projectSearch,projectName: projectSearch,totalTask: projectSearch, completedTask:projectSearch} | orderBy: {property: column, direction: direction}; let i = index">
             <td>{{project.projectName}}</td>
             <td>{{project.totalTask}}</td>
             <td>{{project.completedTask}}</td>

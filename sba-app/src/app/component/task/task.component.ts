@@ -93,6 +93,26 @@ export class TaskComponent implements OnInit {
       
     }
 
+    endTask(task: Task): void {
+
+      this.taskService.endTask(task.taskId.toString(),task)
+      .subscribe( data => {
+        this.reloadComponent();
+    });
+  }
+
+  editTask(task: Task): void {
+    console.log("inside edit task");
+    window.localStorage.removeItem("taskId");
+    window.localStorage.setItem("taskId", task.taskId.toString());
+    this.router.navigate(['edit-task']);
+  };
+
+  reloadComponent() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['view-task']);
+}
 }
 
 

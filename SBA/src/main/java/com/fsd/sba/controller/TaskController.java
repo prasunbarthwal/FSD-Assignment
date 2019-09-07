@@ -1,5 +1,6 @@
 package com.fsd.sba.controller;
 
+import com.fsd.sba.dto.ParentTaskDto;
 import com.fsd.sba.dto.TaskDto;
 import com.fsd.sba.model.Task;
 import org.springframework.http.ResponseEntity;
@@ -26,5 +27,8 @@ public interface TaskController {
 
     @RequestMapping(value = "/tasks/{projectId}", method = RequestMethod.GET)
     public ResponseEntity<List<TaskDto>> getAllTasks(@PathVariable("projectId") Long projectId);
+
+    @RequestMapping(value = "/parents", method = RequestMethod.GET)
+    public ResponseEntity<List<ParentTaskDto>> getAllParents();
 
 }

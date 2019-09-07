@@ -24,8 +24,9 @@ export class ProjectComponent implements OnInit {
   isSubmitted  =  false;
   showActions: boolean = false;  
   order:boolean = false;
-  isDesc:boolean = false;
-
+  isDesc:boolean = true;
+  column:string; 
+  direction: number;
 
 
 
@@ -126,6 +127,12 @@ this.reloadComponent();
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/add-project']);
+}
+
+sort(property){
+  this.isDesc = !this.isDesc; //change the direction    
+  this.column = property;
+  this.direction = this.isDesc ? 1 : -1;
 }
 
 enableDate()

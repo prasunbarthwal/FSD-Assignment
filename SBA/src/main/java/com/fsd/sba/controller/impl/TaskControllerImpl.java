@@ -2,6 +2,7 @@ package com.fsd.sba.controller.impl;
 
 
 import com.fsd.sba.controller.TaskController;
+import com.fsd.sba.dto.ParentTaskDto;
 import com.fsd.sba.dto.TaskDto;
 import com.fsd.sba.model.Task;
 import com.fsd.sba.service.TaskService;
@@ -39,6 +40,12 @@ public class TaskControllerImpl implements TaskController {
         TaskDto task = taskService.findTask(id);
         log.debug("found Task for Id " + id);
         return ResponseEntity.ok().body(task);
+    }
+
+    @Override
+    public ResponseEntity<List<ParentTaskDto>> getAllParents() {
+        return ResponseEntity.ok().body(taskService.findAllParent());
+
     }
 
     @RequestMapping(value = "/task", method = RequestMethod.POST)

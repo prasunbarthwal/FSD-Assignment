@@ -3,6 +3,7 @@ package com.fsd.sba.controller.impl;
 import com.fsd.sba.controller.ProjectController;
 import com.fsd.sba.dto.ProjectDTO;
 import com.fsd.sba.dto.UserDTO;
+import com.fsd.sba.model.Project;
 import com.fsd.sba.service.ProjectService;
 import com.fsd.sba.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +25,11 @@ public class ProjectControllerImpl implements ProjectController {
     ProjectService projectService;
 
     @Override
-    public ResponseEntity updateProject(UserDTO userDTO) {
-        return null;
+    public ResponseEntity updateProject(ProjectDTO projectDto) {
+        projectService.updateProject(projectDto);
+
+        HttpHeaders headers = new HttpHeaders();
+        return new ResponseEntity<>(headers, HttpStatus.OK);
     }
 
 

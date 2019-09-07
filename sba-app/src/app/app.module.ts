@@ -16,6 +16,8 @@ import { ModalComponent } from './component/modal/modal.component';
 import { TaskComponent } from './component/task/task.component';
 import { TaskViewComponent } from './component/task-view/task-view.component';
 import { ModalProjectComponent } from './component/modal-project/modal-project.component';
+import { ModalParentTaskComponent } from './component/modal-parent-task/modal-parent-task.component';
+import { TaskEditComponent } from './component/task-edit/task-edit.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ModalProjectComponent } from './component/modal-project/modal-project.c
     ModalComponent,
     TaskComponent,
     TaskViewComponent,
-    ModalProjectComponent
+    ModalProjectComponent,
+    ModalParentTaskComponent,
+    TaskEditComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +43,7 @@ import { ModalProjectComponent } from './component/modal-project/modal-project.c
     HttpClientModule,
     MaterialModule
   ],
-  entryComponents: [ModalComponent,ModalProjectComponent]
+  entryComponents: [ModalComponent,ModalProjectComponent,ModalParentTaskComponent]
 ,
   providers: [],
   bootstrap: [AppComponent]

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../model/task';
+import { ParentTask } from '../model/parent-task';
+
 import { HttpClient } from "@angular/common/http";
 import {Observable} from 'rxjs';
 
@@ -21,5 +23,32 @@ export class TaskService {
        data.map(data => 
         new Task().deserialize(data)))
     );
+    }
+
+    public  getParentList(): Observable<ParentTask[]> {
+      return this.httpService.get<ParentTask[]>(this.API_URL+ 'parents').pipe(
+        map(data => 
+         data.map(data => 
+          new ParentTask().deserialize(data)))
+      );
+         }
+    
+    public createTask(task:Task)
+    {
+      console.log(task);
+      return this.httpService.post(`${this.API_URL + 'task'}`,task);
+    }
+
+    getTask(taskId):Observable<Task> {
+      return this.httpService.get<Task>(`${this.API_URL + 'task'}/${taskId}`)
+    }
+
+    public endTask(taskId,task:Task)
+    {      
+      return this.httpService.put(`${this.API_URL + 'endTask'}/${taskId}`, task);
+    }
+    public updateTask(task:Task)
+    {
+      return this.httpService.put(`${this.API_URL + 'updateTask'}`,task);
     }
 }
