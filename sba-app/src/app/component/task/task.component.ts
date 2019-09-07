@@ -20,8 +20,6 @@ import {Project} from '../../model/project';
 export class TaskComponent implements OnInit {
   tasks: Task[]=[];
   
-
-  // modalRef: MatDialogRef<ModalComponent>;
  
  
    taskForm: FormGroup;

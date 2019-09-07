@@ -3,7 +3,9 @@
 
 
   
-  
+.mat-slider-horizontal {
+  width: 600px;
+}
  
 .mat-slider.mat-slider-horizontal .mat-slider-wrapper {
   top: 18px;

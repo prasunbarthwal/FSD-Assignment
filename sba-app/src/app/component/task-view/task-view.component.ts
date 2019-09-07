@@ -30,7 +30,7 @@ export class TaskViewComponent implements OnInit {
     parentTaskId:[''],
 
     userName:[''],
-    task:[''],
+    task:['',Validators.required],
     parentTask:[''],
     isParent:[false],
 
@@ -149,6 +149,7 @@ onClear() {
     {
       this.formControls.startDate.disable();
       this.formControls.endDate.disable();
+      this.formControls.priority.disable();
       this.checkPolicy=true;
      
 
@@ -157,6 +158,8 @@ onClear() {
   {
     this.formControls.startDate.enable();
       this.formControls.endDate.enable();
+      this.formControls.priority.enable();
+
       this.checkPolicy=false;
 
 

@@ -45,25 +45,24 @@
    
   <div class="form-group row">
     <label for="priority" class="col-sm-2 col-form-label">Priority:</label>
-    <div class="col-sm-2">
+    <div class="col-sm-5">
         <mat-slider thumbLabel [displayWith]="formatLabel" tickInterval="1" min="0" max="30" name = "priority" formControlName="priority"></mat-slider>
                 
  <div *ngIf="isSubmitted && formControls.priority.errors" class="help-block">
            <div *ngIf="formControls.priority.errors.required">Priority is required</div>
         </div>
     </div>
-    <div class="col-sm-5"></div>
 
   </div>
   <div class="form-group row">
       <label for="manager" class="col-sm-2 col-form-label">Manager</label>
-      <div class="col-sm-5">
+      <div class="col-sm-6">
           <input type="text" placeholder="Select search to populate" formControlName="manager" class="form-control" [readonly]=true>
             <div *ngIf="isSubmitted && formControls.manager.errors" class="help-block">
             <div *ngIf="formControls.manager.errors.required">Manager is required</div>
           </div>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-1">
       <button class="btn btn-primary" type="button" (click)="searchUser()">Search</button>
 </div>
 
@@ -92,16 +91,26 @@
       </div>
       
 </form>
+<span>
+    <div class="col-sm-2"></div>
+
+    <div class="col-sm-5">
+        <input [(ngModel)]="projectSearch" placeholder="Search..." class="advancedSearchTextbox">
+    </div>
+    <div class="col-sm-2">
+    </div>
+</span>
+
 <div class="table-responsive">
 
 <table >
     <tbody>
-    <tr>
-        <td> <input [(ngModel)]="projectSearch" placeholder="Search..." class="advancedSearchTextbox">
-        </td>
-     </tr>
+   
      <tr>
-        <td>Sort By :</td>
+       <td>    <div class="col-sm-2"></div>
+       </td>
+       <td>    <div class="col-sm-2"></div>
+       </td>        <td>Sort By :</td>
         <td>  <button class="btn btn-primary" (click)="sort('startDate')">Start Date </button>  </td>
         <td>  <button class="btn btn-primary" (click)="sort('endDate')">End Date </button>  </td>
         <td>  <button class="btn btn-primary" (click)="sort('priority')">Priority </button> 
