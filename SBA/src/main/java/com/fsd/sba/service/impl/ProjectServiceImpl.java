@@ -73,10 +73,10 @@ public class ProjectServiceImpl implements ProjectService {
 
     }
 
-    @Override
+    /*@Override
     public ProjectDTO findProject(Long id) {
         return null;
-    }
+    }*/
 
     @Override
     public Project saveProject(ProjectDTO projectDTO) {
@@ -118,12 +118,5 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
 
-    User buildUserObject(UserDTO userDTO) {
-        return User.builder()
-                .empId(userDTO.getEmpId())
-                .firstName(userDTO.getFirstName())
-                .lastName(userDTO.getLastName())
-                .userId(userDTO.getUserId())
-                .build();
-    }
+
 }
