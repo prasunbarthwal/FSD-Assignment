@@ -1,7 +1,6 @@
 package com.fsd.sba.task;
 
 
-
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -95,7 +94,32 @@ public class TaskControllerTest {
 
 
     }
+    @Test
+    public void verifySaveTask() throws Exception {
 
+        TaskDto taskDto = TaskDto.builder()
+                .userId(Long.valueOf(1)).userName("user")
+                .task("task")
+                .projectName("project")
+                .projectId(Long.valueOf(1))
+                .startDate(LocalDate.now())
+                .endDate(LocalDate.now())
+                .parentTask("parent")
+                .parentTaskId(Long.valueOf(1))
+                .isParent(false)
+                .priority(1)
+                .build();
+        mockMvc.perform(MockMvcRequestBuilders.post("/fsd/task")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(taskDto))
+                .accept(MediaType.APPLICATION_JSON))
+            //    .andExpect(jsonPath("$.id").exists())
+              //  .andExpect(jsonPath("$.task").exists())
+                //.andExpect(jsonPath("$.projectId").exists())
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+    }
     @Test
     public void verifyAllTaskList() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/fsd/tasks/1").accept(MediaType.APPLICATION_JSON))
@@ -121,6 +145,7 @@ public class TaskControllerTest {
 
 
     }
+
     @Test
     public void verifySaveProject() throws Exception {
         LocalDate startDate = LocalDate.now();
