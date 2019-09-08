@@ -91,13 +91,12 @@
       </div>
       
 </form>
+
 <span>
-    <div class="col-sm-2"></div>
+    
 
     <div class="col-sm-5">
-        <input [(ngModel)]="projectSearch" placeholder="Search..." class="advancedSearchTextbox">
-    </div>
-    <div class="col-sm-2">
+        <input size="70" [(ngModel)]="projectSearch" placeholder="Search..." class="advancedSearchTextbox">
     </div>
 </span>
 
@@ -107,14 +106,11 @@
     <tbody>
    
      <tr>
-       <td>    <div class="col-sm-2"></div>
-       </td>
-       <td>    <div class="col-sm-2"></div>
-       </td>        <td>Sort By :</td>
-        <td>  <button class="btn btn-primary" (click)="sort('startDate')">Start Date </button>  </td>
-        <td>  <button class="btn btn-primary" (click)="sort('endDate')">End Date </button>  </td>
-        <td>  <button class="btn btn-primary" (click)="sort('priority')">Priority </button> 
-          <td>  <button class="btn btn-primary" (click)="sort('completedTask')">Completed </button> 
+       <td style = "padding: 20px;">Sort By :</td>
+        <td   style = "padding: 20px;" >  <button class="btn btn-primary" (click)="sort('startDate')">Start Date </button>  </td>
+        <td style = "padding: 20px;">  <button class="btn btn-primary" (click)="sort('endDate')">End Date </button>  </td>
+        <td style = "padding: 20px;">  <button class="btn btn-primary" (click)="sort('priority')">Priority </button> 
+          <td style = "padding: 0px;">  <button class="btn btn-primary" (click)="sort('completedTask')">Completed </button> 
      </tr>
     
     </tbody>
