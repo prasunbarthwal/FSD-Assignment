@@ -74,18 +74,18 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void saveTask(TaskDto taskDto) {
-
+    public Task saveTask(TaskDto taskDto) {
+    Task task = null;
         log.debug("Inside save Task method");
         if (null != taskDto.getIsParent() && taskDto.getIsParent()) {
             ParentTask parentTask = ParentTask.builder()
-                    .parentTask(taskDto.getParentTask()).build();
+                    .parentTask(taskDto.getTask()).build();
 
             parentTaskRepository.save(parentTask);
-            return;
+            return task ;
 
         } else {
-            Task task = Task.builder().endDate(taskDto.getEndDate())
+             task = Task.builder().endDate(taskDto.getEndDate())
                     .startDate(taskDto.getStartDate())
                     .task(taskDto.getTask())
                     .priority(taskDto.getPriority())
@@ -101,7 +101,7 @@ public class TaskServiceImpl implements TaskService {
 
         }
 
-        //save task
+return task;
     }
 
 

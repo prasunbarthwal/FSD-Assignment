@@ -14,7 +14,7 @@ public interface TaskService {
 
     public TaskDto findTask(Long id);
 
-    public void saveTask(TaskDto task);
+    public Task saveTask(TaskDto task);
 
     public Task updateTask(TaskDto task);
 
