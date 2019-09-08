@@ -94,12 +94,17 @@ public class UserServiceTest {
                 .projectId(Long.valueOf(1))
                 .taskId(Long.valueOf(1))
                 .build();
-        User saved = new User(Long.valueOf(1), "Last Name Changed", "First Name", 2,Long.valueOf(1),Long.valueOf(1));
+        User saved = new User(Long.valueOf(1), "Last Name Changed", "First Name Changed", 2,Long.valueOf(1),Long.valueOf(1));
         when(userRepository.save(user)).thenReturn(saved);
         User result = userService.updateUser(userDTO);
         assertEquals(Long.valueOf(1), result.getUserId());
-        assertEquals("First Name", result.getFirstName());
+        assertEquals("First Name Changed", result.getFirstName());
         assertEquals("Last Name Changed", result.getLastName());
+        assertEquals(Long.valueOf(1), result.getTaskId());
+        assertEquals(Integer.valueOf(2), result.getEmpId());
+        assertEquals(Long.valueOf(1), result.getProjectId());
+
+
 
         assertEquals(Integer.valueOf(2), result.getEmpId());
     }
