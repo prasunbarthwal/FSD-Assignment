@@ -24,7 +24,6 @@ export class ProjectService {
   
     public createProject(project:Project)
     {
-      console.log(project);
       return this.httpService.post(`${this.API_URL + 'project'}`,project);
     }
   

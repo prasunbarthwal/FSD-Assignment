@@ -35,7 +35,6 @@ export class TaskService {
     
     public createTask(task:Task)
     {
-      console.log(task);
       return this.httpService.post(`${this.API_URL + 'task'}`,task);
     }
 

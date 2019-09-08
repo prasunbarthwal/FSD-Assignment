@@ -56,13 +56,12 @@ this.save();
 
   close()
   {
-    console.log("inside project modal close");
     this.dialogRef.close();
 
   }
 
   save()
-  {     console.log("inside project modal save");
+  {     
 
     this.dialogRef.close(this.form.value);
 

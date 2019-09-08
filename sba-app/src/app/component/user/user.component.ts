@@ -74,16 +74,12 @@ export class UserComponent implements OnInit {
     }
   let index = userForm.getRawValue().index
   if(index != null) {
-    console.log('inside update');
     this.users[index] = userForm.value;
     this.onUpdateSubmit(userForm)
 
   } else {
-   // this.users.push(userForm.value)
-       console.log("creating user 1"+this.userForm.value)
    this.userService.createUser(this.userForm.value)
    .subscribe( data => {
-   // this.router.navigate(['add-user']);
 this.reloadComponent();
   });
   }

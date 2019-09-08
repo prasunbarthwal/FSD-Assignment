@@ -55,7 +55,6 @@ this.addTaskForm.patchValue(
 get formControls() { return this.addTaskForm.controls; }
 
 onSubmit() {
-  console.log("inside add task");
   this.isSubmitted = true;
   if(this.addTaskForm.invalid){
     return;
@@ -64,7 +63,6 @@ onSubmit() {
     .subscribe( data => {
       this.router.navigate(['view-task']);
 
-    //  this.router.navigate(['list-user']);
     });
 
   }

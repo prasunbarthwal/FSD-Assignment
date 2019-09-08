@@ -38,7 +38,6 @@ export class TaskComponent implements OnInit {
    ngOnInit() {
    
     
-     console.log("init task component");
       this.taskForm  =  this.formBuilder.group({
         index: [{value: null, disabled:true}],
         projectId:[''],
@@ -103,7 +102,6 @@ export class TaskComponent implements OnInit {
   }
 
   editTask(task: Task): void {
-    console.log("inside edit task");
     window.localStorage.removeItem("taskId");
     window.localStorage.setItem("taskId", task.taskId.toString());
     this.router.navigate(['edit-task']);

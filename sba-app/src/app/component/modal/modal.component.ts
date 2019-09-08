@@ -42,9 +42,6 @@ export class ModalComponent implements OnInit {
   }
 
   selectUser(user:User, i) {
-    console.log("inside select user");
-    console.log("userID"+user.userId);
-    console.log("userID"+user.firstName);
 
 
     
@@ -60,13 +57,12 @@ this.save();
 
   close()
   {
-    console.log("inside modal close");
     this.dialogRef.close();
 
   }
 
   save()
-  {     console.log("inside modal save");
+  {    
 
     this.dialogRef.close(this.form.value);
 

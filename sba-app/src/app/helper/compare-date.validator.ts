@@ -12,7 +12,6 @@ export function CompareDate(controlName: string, matchingControlName: string) {
         }
 
         // set error on matchingControl if validation fails
-        console.log("validator aftre if");
         if (control.value < matchingControl.value) {
 
             matchingControl.setErrors({ mustMatch: true });

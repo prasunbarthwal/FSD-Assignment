@@ -56,7 +56,6 @@ export class ProjectComponent implements OnInit {
    
   onUpdateSubmit(userForm)
   {
-    console.log('inside update 1');
 
     this.isSubmitted = true;
     if(this.projectForm.invalid){
@@ -72,29 +71,20 @@ export class ProjectComponent implements OnInit {
   }
 
   onAddSubmit(projectForm) {
-    console.log('inside create 5'+this.projectForm.value);
-    console.log(this.formControls.projectName.value);
-    console.log(this.formControls.userId.value);
-    console.log(this.formControls.manager.value);
-
-
+  
     this.isSubmitted = true;
     if(this.projectForm.invalid){
-      console.log('inside invalid'+this.projectForm.value);
 
       return;
     }
   let index = projectForm.getRawValue().index
-  console.log('inside create 2'+index);
 
   if(index != null) {
-    console.log('inside update');
     this.projects[index] = projectForm.value;
     this.onUpdateSubmit(projectForm)
 
   } else {
    // this.users.push(userForm.value)
-   console.log('inside create 3'+this.projectForm.value);
 
    this.projectService.createProject(this.projectForm.value)
    .subscribe( data => {

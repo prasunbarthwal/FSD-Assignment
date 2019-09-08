@@ -18,7 +18,6 @@ export class TaskEditComponent implements OnInit {
   myform: FormGroup;
 
   ngOnInit() {
-    console.log("inside init edit");
     this.myform  =  this.formBuilder.group({
       projectId:[''],
       taskId:[''],

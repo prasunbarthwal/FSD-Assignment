@@ -23,7 +23,6 @@ export class UserService {
   
     public createUser(user:User)
     {
-      console.log("creating user"+user);
 
       return this.httpService.post(`${this.API_URL + 'user'}`,user);
     }
