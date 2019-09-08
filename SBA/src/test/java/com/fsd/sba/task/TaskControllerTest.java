@@ -54,21 +54,7 @@ public class TaskControllerTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 
     }
-/*
-    @RequestMapping(value = "/endTask/{taskId}", method = RequestMethod.PUT)
-    public ResponseEntity endTask(@PathVariable("taskId") Long id, @RequestBody TaskDto taskDto) ;
 
-    @RequestMapping(value = "/updateTask", method = RequestMethod.PUT)
-    public ResponseEntity updateTask(@RequestBody TaskDto taskDto);
-
-    @RequestMapping(value = "/task", method = RequestMethod.POST)
-    public ResponseEntity<Task> addTask(@RequestBody TaskDto taskDto);
-
-    @RequestMapping(value = "/task/{taskId}", method = RequestMethod.GET)
-    public ResponseEntity<TaskDto> getTask(@PathVariable("taskId") Long id);
-
-    @RequestMapping(value = "/tasks/{projectId}", method = RequestMethod.GET)
-    public ResponseEntity<List<TaskDto>> getAllTasks(@PathVariable("projectId") Long projectId);*/
 
     @Test
     public void verifyEndTask() throws Exception {
@@ -85,7 +71,7 @@ public class TaskControllerTest {
                 .isParent(false)
                 .priority(1)
                 .build();
-        mockMvc.perform(MockMvcRequestBuilders.put("/fsd/updateProject")
+        mockMvc.perform(MockMvcRequestBuilders.put("/fsd/endTask/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(taskDto))
                 .accept(MediaType.APPLICATION_JSON))
@@ -146,68 +132,4 @@ public class TaskControllerTest {
 
     }
 
-    @Test
-    public void verifySaveProject() throws Exception {
-        LocalDate startDate = LocalDate.now();
-        LocalDate endDate = LocalDate.now();
-        mockMvc.perform(MockMvcRequestBuilders.post("/fsd/project")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"projectName\" : \"Project test\" , \"userId\" : 1,\"priority\" : 15}")
-                .accept(MediaType.APPLICATION_JSON))
-                // .andExpect(jsonPath("$.projectId").exists())
-                //.andExpect(jsonPath("$.projectName").exists())
-                //  .andExpect(jsonPath("$.text").value("New ToDo Sample"))
-                //.andExpect(jsonPath("$.completed").value(false))*//*
-                .andDo(print())
-                .andExpect(status().isCreated())
-        ;
-    }
-
-    @Test
-    public void verifyUpdateProject() throws Exception {
-        ProjectDTO projectDTO = new ProjectDTO(Long.valueOf(1), "Test Project", "Test Manager", Long.valueOf(1), 1, 3, 2, LocalDate.now(), LocalDate.now());
-
-        mockMvc.perform(MockMvcRequestBuilders.put("/fsd/updateProject")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(projectDTO))
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk());
-    }
-
-   /* @Test
-    public void verifyProjectById() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.get("/fsd/project/1").accept(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$.projectId").value(3))
-                .andExpect(jsonPath("$.projectName").exists())
-                .andExpect(jsonPath("$.userId").exists())
-                .andExpect(jsonPath("$.priority").exists())
-                .andDo(print());
-    }*/
-
-   /* @Test
-    public void verifySaveProject() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.post("/fsd/project")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"firstName\" : \"First\", \"lastName\" : \"last\" , \"empId\" : 15}")
-                .accept(MediaType.APPLICATION_JSON))
-                *//*.andExpect(jsonPath("$.taskId").exists())
-                .andExpect(jsonPath("$.text").exists())
-                .andExpect(jsonPath("$.completed").exists())
-                .andExpect(jsonPath("$.text").value("New ToDo Sample"))
-                .andExpect(jsonPath("$.completed").value(false))*//*
-                .andDo(print())
-                .andExpect(status().isCreated())
-        ;
-    }
-
-    @Test
-    public void verifyUpdateUser() throws Exception {
-        mockMvc.perform(MockMvcRequestBuilders.put("/fsd/updateUser")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"userId\": 1, \"firstName\" : \"First name update\", \"lastName\" : \"last name update\" , \"empId\" : 3 }")
-                .accept(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().is(200));
-    }*/
 }
