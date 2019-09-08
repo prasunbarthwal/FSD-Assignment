@@ -112,7 +112,7 @@ public class TaskControllerTest {
                 // .andExpect(jsonPath("$", hasSize(9)))
                 .andDo(print())
 
-                .andExpect(status().is(200));
+                .andExpect(status().isOk());
 
 
     }
@@ -132,4 +132,40 @@ public class TaskControllerTest {
 
     }
 
+    @Test
+    public void verifyAllParents() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/fsd/parents").accept(MediaType.APPLICATION_JSON))
+                // .andExpect(jsonPath("$", hasSize(9))) updateTask
+                 .andDo(print())
+                .andExpect(status().isOk());
+
+
+    }
+
+    @Test
+    public void verifyUpdateTask() throws Exception {
+
+        TaskDto taskDto = TaskDto.builder()
+                .userId(Long.valueOf(1)).userName("user")
+                .task("task")
+                .projectName("project")
+                .projectId(Long.valueOf(1))
+                .startDate(LocalDate.now())
+                .endDate(LocalDate.now())
+                .parentTask("parent")
+                .parentTaskId(Long.valueOf(1))
+                .isParent(false)
+                .priority(1)
+                .build();
+        mockMvc.perform(MockMvcRequestBuilders.post("/fsd/updateTask")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(taskDto))
+                .accept(MediaType.APPLICATION_JSON))
+                //    .andExpect(jsonPath("$.id").exists())
+                //  .andExpect(jsonPath("$.task").exists())
+                //.andExpect(jsonPath("$.projectId").exists())
+                .andDo(print())
+                .andExpect(status().isOk());
+
+    }
 }
