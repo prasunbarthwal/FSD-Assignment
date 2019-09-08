@@ -193,6 +193,19 @@ Task result = taskService.updateTask(taskDto);
 
     }
     @Test
+    public void saveParentTask() {
+        TaskDto taskDto = TaskDto.builder()
+                .projectId(Long.valueOf(1))
+                .task( "Parent Task")
+                .isParent(true).build();
+        ParentTask parentTask = new ParentTask(Long.valueOf(1), "Parent Task");
+        when(parentTaskRepository.save(parentTask)).thenReturn(parentTask);
+        Task result  = taskService.saveTask(taskDto);
+        assertEquals(null, result);
+
+
+    }
+    @Test
     public void saveTask() {
         TaskDto taskDto = TaskDto.builder()
                 //.taskId(Long.valueOf(1))
