@@ -137,10 +137,65 @@ public class TaskServiceTest {
 
 
     }
+
+    @Test
+    public void updateTask() {
+        TaskDto taskDto = TaskDto.builder()
+                .taskId(Long.valueOf(1))
+                .userId(Long.valueOf(1)).userName("user")
+                .task("task")
+                .projectName("project")
+                .projectId(Long.valueOf(1))
+                .startDate(LocalDate.now())
+                .endDate(LocalDate.now())
+                .parentTask("parent")
+                .parentTaskId(Long.valueOf(1))
+                .isParent(false)
+                .priority(1)
+                .build();
+        Task taskOne = new Task(Long.valueOf(1), Long.valueOf(1), Long.valueOf(1), "task One", null, LocalDate.now(), LocalDate.now(), 1);
+        Task saved =   Task.builder()
+                .id(Long.valueOf(1))
+                .endDate(LocalDate.now())
+                .startDate(LocalDate.now())
+                .task("task")
+                .priority(2)
+                .status("UPDATED")
+                .projectId(Long.valueOf(1))
+                .parentId(Long.valueOf(1))
+                .build();
+        when(taskRepository.getOne(1L)).thenReturn(taskOne);
+        when(taskRepository.save(taskOne)).thenReturn(saved);
+        User userExisting = new User(Long.valueOf(1), "Last Name", "First Name", 1, Long.valueOf(1),Long.valueOf(1));
+        when(userRepository.getOne(1L)).thenReturn(userExisting);
+        User user = User.builder()
+                .userId(Long.valueOf(1))
+                .empId(1)
+                .firstName("First Name")
+                .lastName("Last Name")
+                .projectId(Long.valueOf(1))
+                .taskId(Long.valueOf(1))
+                .build();
+        User userSaved = new User(Long.valueOf(1), "Last Name Changed", "First Name", 2,Long.valueOf(1),Long.valueOf(1));
+        when(userRepository.save(user)).thenReturn(userSaved);
+
+
+Task result = taskService.updateTask(taskDto);
+        assertEquals(Long.valueOf(1), result.getId());
+        assertEquals(Long.valueOf(1), result.getParentId());
+        assertEquals(Long.valueOf(1), result.getProjectId());
+
+        assertEquals("task", result.getTask());
+        assertEquals(Integer.valueOf(2), result.getPriority());
+
+        assertEquals(LocalDate.now(), result.getStartDate());
+        assertEquals(LocalDate.now(), result.getEndDate());
+
+    }
     @Test
     public void saveTask() {
         TaskDto taskDto = TaskDto.builder()
-                .taskId(Long.valueOf(1))
+                //.taskId(Long.valueOf(1))
                 .userId(Long.valueOf(1)).userName("user")
                 .task("task")
                 .projectName("project")

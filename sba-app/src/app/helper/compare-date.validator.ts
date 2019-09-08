@@ -7,14 +7,15 @@ export function CompareDate(controlName: string, matchingControlName: string) {
         const matchingControl = formGroup.controls[matchingControlName];
 
         if (matchingControl.errors && !matchingControl.errors.mustMatch) {
-            alert(1);
+            alert(11);
             // return if another validator has already found an error on the matchingControl
             return;
         }
 
         // set error on matchingControl if validation fails
+        console.log("validator aftre if");
         if (control.value < matchingControl.value) {
-            alert(2);
+            alert(10);
 
             matchingControl.setErrors({ mustMatch: true });
         } else {
