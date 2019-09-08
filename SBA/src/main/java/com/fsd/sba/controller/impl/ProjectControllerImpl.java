@@ -26,6 +26,9 @@ public class ProjectControllerImpl implements ProjectController {
 
     @Override
     public ResponseEntity updateProject(ProjectDTO projectDto) {
+
+        log.debug("Entered updateProject Request Mapping ");
+
         projectService.updateProject(projectDto);
 
         HttpHeaders headers = new HttpHeaders();
@@ -36,9 +39,14 @@ public class ProjectControllerImpl implements ProjectController {
     @RequestMapping(value = "/project", method = RequestMethod.POST)
 
     public ResponseEntity<ProjectDTO> addProject(ProjectDTO projectDTO) {
+        log.debug("Entered addProject Request Mapping ");
+
         projectService.saveProject(projectDTO);
+        log.debug("Project created successfully ");
+
         HttpHeaders headers = new HttpHeaders();
-        return new ResponseEntity<>(headers, HttpStatus.CREATED);    }
+        return new ResponseEntity<>(headers, HttpStatus.CREATED);
+    }
 
     /*@Override
     public ResponseEntity<UserDTO> getProject(Long id) {
@@ -48,6 +56,8 @@ public class ProjectControllerImpl implements ProjectController {
     @RequestMapping(value = "/projects", method = RequestMethod.GET)
 
     public ResponseEntity<List<ProjectDTO>> getAllProjects() {
+        log.debug("Entered getAllProjects Request Mapping ");
+
         List<ProjectDTO> projects = projectService.findAll();
         return ResponseEntity.ok().body(projects);    }
 }

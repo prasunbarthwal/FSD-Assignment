@@ -108,7 +108,10 @@ return task;
     @Override
     public Task updateTask(TaskDto taskDto) {
 
+        log.debug("Update Task operation started ");
+
         Task task = taskRepository.getOne(taskDto.getTaskId());
+        log.debug("Task found with Id :");
 
         task.setEndDate(taskDto.getEndDate());
         task.setStartDate(taskDto.getStartDate());
@@ -120,6 +123,8 @@ return task;
 
 
         User user = userRepository.getOne(taskDto.getUserId());
+        log.debug("User found with Id :"+taskDto.getUserId());
+
         user.setTaskId(task.getId());
         userRepository.save(user);
 
@@ -128,7 +133,11 @@ return task;
 
     @Override
     public Task endTask(Long id) {
+        log.debug("End Task operation started ");
+
         Task task = taskRepository.getOne(id);
+        log.debug("Task found with Id :"+id);
+
         task.setStatus("COMPLETED");
         task.setEndDate(LocalDate.now());
         return taskRepository.save(task);
@@ -137,6 +146,8 @@ return task;
 
     @Override
     public List<ParentTaskDto> findAllParent() {
+        log.debug("FindAllParent operation started ");
+
         List<ParentTask> parentTaskList = parentTaskRepository.findAll();
         List<ParentTaskDto> parentTaskDtos = new ArrayList<>();
         for (ParentTask parentTask : parentTaskList) {

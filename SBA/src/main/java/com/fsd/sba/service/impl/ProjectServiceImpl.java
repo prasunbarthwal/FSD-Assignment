@@ -39,9 +39,11 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectDTO> findAll() {
+        log.debug("Find All operation started");
 
         List<Project> projects = projectRepository.findAll();
         List<ProjectDTO> projectDTOList = new ArrayList<>();
+        log.debug("Found projects :"+projects);
 
         for (Project project : projects) {
             User user = userRepository.findByProjectId(project.getId());
@@ -61,28 +63,19 @@ public class ProjectServiceImpl implements ProjectService {
             projectDTOList.add(projectDTO);
         }
 
-/*        List<ProjectDTO> projectDTOList = projects.stream().map(project -> ProjectDTO.builder()
-                .projectId(project.getTaskId())
-                .projectName(project.getProjectName())
-                .startDate(project.getStartDate())
-                .endDate(project.getEndDate())
-                .priority(project.getPriority())
-                .build()).collect(Collectors.toList());
-       */
+
         return projectDTOList;
 
     }
 
-    /*@Override
-    public ProjectDTO findProject(Long id) {
-        return null;
-    }*/
+
 
     @Override
     public Project saveProject(ProjectDTO projectDTO) {
 
         // UserDTO userDTO = userService.findUser(projectDTO.getUserId());
         User user = userRepository.getOne(projectDTO.getUserId());
+        log.debug("User found for project:");
 
         Project project = Project.builder()
                 .projectName(projectDTO.getProjectName())
@@ -101,11 +94,14 @@ public class ProjectServiceImpl implements ProjectService {
         project = projectRepository.save(project);
         user.setProjectId(project.getId());
         userRepository.save(user);
+        log.debug("User saved successfully");
+
         return project;
     }
 
     @Override
     public Project updateProject(ProjectDTO projectDTO) {
+        log.debug("update Project method started");
 
         Project project = projectRepository.getOne(projectDTO.getProjectId());
 
@@ -114,6 +110,7 @@ public class ProjectServiceImpl implements ProjectService {
         project.setProjectName(projectDTO.getProjectName());
         project.setStartDate(projectDTO.getStartDate());
         return projectRepository.save(project);
+
 
     }
 

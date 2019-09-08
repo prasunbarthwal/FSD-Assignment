@@ -24,7 +24,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDTO> findAll() {
+        log.debug("Find all method started in User Service");
+
         List<User> users = userRepository.findAll();
+        log.debug("Users fetched successfully:"+users);
+
         List<UserDTO> userDTOList = users.stream().map(user -> UserDTO.builder()
                 .userId(user.getUserId())
                 .empId(user.getEmpId())
@@ -36,6 +40,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findUser(Long id) {
+        log.debug("Find user method started");
+
         User user = userRepository.getOne(id);
         return UserDTO.builder()
                 .userId(user.getUserId())
@@ -46,6 +52,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(UserDTO userDTO) {
+        log.debug("Save user method started");
 
         User user = User.builder()
                 .empId(userDTO.getEmpId())
@@ -53,27 +60,28 @@ public class UserServiceImpl implements UserService {
                 .lastName(userDTO.getLastName())
                 .build();
         user = userRepository.save(user);
+        log.debug("User saved successfully");
+
         return user;
 
     }
 
     @Override
     public User updateUser(UserDTO userDTO) {
+        log.debug("Update user method started");
 
         User user = userRepository.getOne(userDTO.getUserId());
+        log.debug("Found user with Id:"+userDTO.getUserId());
 
         user.setEmpId(userDTO.getEmpId());
         user.setFirstName(userDTO.getFirstName());
         user.setLastName(userDTO.getLastName());
 
         user = userRepository.save(user);
+        log.debug("User saved successfully");
 
         return user;
 
     }
 
-    /*@Override
-    public void delUser(Long taskId) {
-
-    }*/
 }
