@@ -160,7 +160,7 @@ public class TaskServiceImpl implements TaskService {
 
         for (Task task : taskList) {
             ParentTask parentTask = null;
-            if(Objects.nonNull(task.getParentId()))
+            if (Objects.nonNull(task.getParentId()))
                 parentTask = parentTaskRepository.getOne(task.getParentId());
             TaskDto taskDto = TaskDto.builder()
                     .taskId(task.getId())
@@ -168,7 +168,7 @@ public class TaskServiceImpl implements TaskService {
                     .startDate(task.getStartDate())
                     .endDate(task.getEndDate())
                     .task(task.getTask())
-                    .parentTask(Objects.nonNull(parentTask)?parentTask.getParentTask():"")
+                    .parentTask(Objects.nonNull(parentTask) ? parentTask.getParentTask() : "")
                     .build();
             taskDtoList.add(taskDto);
         }
@@ -179,59 +179,6 @@ public class TaskServiceImpl implements TaskService {
 
 }
 
-/*
-    @Override
-    public TaskDto findTask(Long taskId) {
-
-        log.debug("Inside find Task method");
-        Optional<Task> task = taskRepository.findById(taskId);
-        log.debug("Task found for taskId " + taskId);
-        return TaskDto.builder()
-                .taskId(task.get().getTaskId())
-                .endDate(task.isPresent() ? task.get().getEndDate() : null)
-                .startDate(task.isPresent() ? task.get().getStartDate() : null)
-                .task(task.isPresent() ? task.get().getTask() : null)
-                .priority(task.isPresent() ? task.get().getPriority() : null)
-              //  .parentTask(task.get().getParentTask() != null ? task.get().getParentTask().getParentTask() : null)
-                .build();
-    }*/
-
-
-//        @Override
-/*
-    public Task updateTask(TaskDto taskDto) {
-
-        log.debug("Inside update Task method");
-        Optional<Task> task = taskRepository.findById(taskDto.getTaskId());
-        Task oldTask = task.get();
-        log.debug("Found task for update with taskId" +task);
-        oldTask.setTask(taskDto.getTask());
-        oldTask.setPriority(taskDto.getPriority());
-        oldTask.setEndDate(taskDto.getEndDate());
-        oldTask.setStartDate(taskDto.getStartDate());
-       */
-/* if (Objects.nonNull(oldTask.getParentTask()))
-            oldTask.getParentTask().setParentTask(taskDto.getParentTask());
-        else
-            oldTask.setParentTask(ParentTask.builder().parentTask(taskDto.getParentTask()).build());
-*//*
-
-        return taskRepository.save(oldTask);
-    }
-
-
-    @Override
-    public Task endTask(Long taskId) {
-
-        log.debug("Inside end Task method");
-        Optional<Task> task = taskRepository.findById(taskId);
-        task.get().setEndDate(LocalDate.now());
-        log.debug("Task ended for Id" + taskId);
-        return taskRepository.save(task.get());
-
-
-    }
-*/
 
 
 

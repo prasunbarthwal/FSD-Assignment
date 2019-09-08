@@ -47,23 +47,7 @@ public class ProjectServiceTest {
         MockitoAnnotations.initMocks(this);
     }
 
-    private Long projectId;
 
-    private String projectName;
-
-    private String manager;
-
-    private Long userId;
-
-    private Integer priority;
-
-    private Integer totalTask;
-
-    private Integer completedTask;
-
-    private LocalDate startDate;
-
-    private LocalDate endDate;
 
     @Test
     public void testGetAllProject() {
@@ -126,48 +110,37 @@ public class ProjectServiceTest {
     }
 
 
- /*   @Test
-    public void saveProject {
-        UserDTO userDTO = new UserDTO(Long.valueOf(1), "Last Name", "First Name", 1);
-        ProjectDTO projectDTO = new ProjectDTO(Long.valueOf(1),"Test Project","Test Manager",Long.valueOf(1),1,LocalDate.now(),LocalDate.now());
-        //  User user = new User(Long.valueOf(1),"Last Name","First Name",1,new Project());
-        User user = User.builder()
-                .empId(1)
-                .firstName("First Name")
-                .lastName("Last Name")
-                .build();
-        User saved = new User(Long.valueOf(2), "Last Name", "First Name", 1,Long.valueOf(1),Long.valueOf(1));
-        when(userRepository.save(user)).thenReturn(saved);
-        User result = userService.saveUser(userDTO);
-        assertEquals(Long.valueOf(2), result.getUserId());
-        assertEquals("First Name", result.getFirstName());
-        assertEquals("Last Name", result.getLastName());
 
-        assertEquals(Integer.valueOf(1), result.getEmpId());
-    }
 
     @Test
-    public void updateUser() {
-        UserDTO userDTO = new UserDTO(Long.valueOf(1), "Last Name", "First Name", 1);
-        //  User user = new User(Long.valueOf(1),"Last Name","First Name",1,new Project());
-        User userExisting = new User(Long.valueOf(1), "Last Name", "First Name", 1, Long.valueOf(1),Long.valueOf(1));
-        when(userRepository.getOne(1L)).thenReturn(userExisting);
-        User user = User.builder()
-                .userId(Long.valueOf(1))
-                .empId(1)
-                .firstName("First Name")
-                .lastName("Last Name")
-                .projectId(Long.valueOf(1))
-                .taskId(Long.valueOf(1))
-                .build();
-        User saved = new User(Long.valueOf(1), "Last Name Changed", "First Name", 2,Long.valueOf(1),Long.valueOf(1));
-        when(userRepository.save(user)).thenReturn(saved);
-        User result = userService.updateUser(userDTO);
-        assertEquals(Long.valueOf(1), result.getUserId());
-        assertEquals("First Name", result.getFirstName());
-        assertEquals("Last Name Changed", result.getLastName());
+    public void updateProject() {
+        //UserDTO userDTO = new UserDTO(Long.valueOf(1), "Last Name", "First Name", 1);
+        ProjectDTO projectDTO = new ProjectDTO(Long.valueOf(1), "Test Project", "Test Manager", Long.valueOf(1), 1, 3, 2, LocalDate.now(), LocalDate.now());
 
-        assertEquals(Integer.valueOf(2), result.getEmpId());
-    }*/
+        //  User user = new User(Long.valueOf(1),"Last Name","First Name",1,new Project());
+      //  User userExisting = new User(Long.valueOf(1), "Last Name", "First Name", 1, Long.valueOf(1),Long.valueOf(1));
+        Project projectExisting = new Project(Long.valueOf(1), "Test Project", LocalDate.now(), LocalDate.now(), 1);
+
+        when(projectRepository.getOne(1L)).thenReturn(projectExisting);
+
+        Project project = Project.builder()
+                .id(Long.valueOf(1))
+                .priority(1)
+                .startDate(LocalDate.now())
+                .endDate(LocalDate.now())
+                .projectName("Test Project")
+                .build();
+       // User saved = new User(Long.valueOf(1), "Last Name Changed", "First Name", 2,Long.valueOf(1),Long.valueOf(1));
+        Project saved = new Project(Long.valueOf(1), "Test Project Changed", LocalDate.now(), LocalDate.now(), 3);
+
+        when(projectRepository.save(project)).thenReturn(saved);
+       // User result = userService.updateUser(userDTO);
+       Project result =  projectService.updateProject(projectDTO);
+        assertEquals(Long.valueOf(1), result.getId());
+        assertEquals(LocalDate.now(), result.getStartDate());
+        assertEquals("Test Project Changed", result.getProjectName());
+
+        assertEquals(Integer.valueOf(3), result.getPriority());
+    }
 
 }

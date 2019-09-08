@@ -11,10 +11,6 @@ public interface ProjectService {
 
     List<ProjectDTO> findAll();
 
-/*
-    ProjectDTO findProject(Long id);
-*/
-
     Project saveProject(ProjectDTO projectDTO);
 
     Project updateProject(ProjectDTO projectDTO);
