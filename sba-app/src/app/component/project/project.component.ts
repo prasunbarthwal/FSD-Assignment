@@ -48,9 +48,7 @@ export class ProjectComponent implements OnInit {
        manager: ['',Validators.required],
        startDate: [{value:'', disabled:true}],
        endDate:[{value:'', disabled:true}]
-      }, {
-        validator: CompareDate('startDate', 'endDate')
-   });
+      });
  
    }
    get formControls() { return this.projectForm.controls; }
