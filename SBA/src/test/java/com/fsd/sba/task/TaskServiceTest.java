@@ -15,6 +15,7 @@ import com.fsd.sba.dao.ParentTaskRepository;
 import com.fsd.sba.dao.ProjectRepository;
 import com.fsd.sba.dao.TaskRepository;
 import com.fsd.sba.dao.UserRepository;
+import com.fsd.sba.dto.ParentTaskDto;
 import com.fsd.sba.dto.ProjectDTO;
 import com.fsd.sba.dto.TaskDto;
 import com.fsd.sba.dto.UserDTO;
@@ -81,6 +82,28 @@ public class TaskServiceTest {
     }
 
     @Test
+    public void testEndTaskById() {
+        Task taskOne = new Task(Long.valueOf(1), Long.valueOf(1), Long.valueOf(1), "task One", null, LocalDate.now(), LocalDate.now(), 1);
+        Task saved =   Task.builder()
+                .id(Long.valueOf(1))
+                .endDate(LocalDate.now())
+                .startDate(LocalDate.now())
+                .task("task")
+                .priority(1)
+                .status("COMPLETED")
+                .projectId(Long.valueOf(1))
+                .parentId(Long.valueOf(1))
+                .build();
+        when(taskRepository.getOne(1L)).thenReturn(taskOne);
+        when(taskRepository.save(taskOne)).thenReturn(saved);
+       Task result =  taskService.endTask(taskOne.getId());
+        assertEquals("COMPLETED", result.getStatus());
+
+
+
+    }
+
+    @Test
     public void testGetTaskById() {
         Task taskOne = new Task(Long.valueOf(1), Long.valueOf(1), Long.valueOf(1), "task One", null, LocalDate.now(), LocalDate.now(), 1);
         ParentTask parentTask = new ParentTask(Long.valueOf(1), "Parent Task");
@@ -100,6 +123,20 @@ public class TaskServiceTest {
 
     }
 
+    @Test
+    public void testFindAllParent() {
+
+        List<ParentTask> parentTaskList = new ArrayList<>();
+
+        parentTaskList.add(new ParentTask(Long.valueOf(1),"parent1"));
+        parentTaskList.add(new ParentTask(Long.valueOf(2),"parent2"));
+        when(parentTaskRepository.findAll()).thenReturn(parentTaskList);
+
+      List<ParentTaskDto> result =   taskService.findAllParent();
+        assertEquals(2, result.size());
+
+
+    }
     @Test
     public void saveTask() {
         TaskDto taskDto = TaskDto.builder()
@@ -175,7 +212,7 @@ public class TaskServiceTest {
 /*
 
 
-   
+
 
     @Test
     public void updateUser() {
