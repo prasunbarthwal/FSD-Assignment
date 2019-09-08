@@ -9,7 +9,6 @@ import { ModalParentTaskComponent } from '../modal-parent-task/modal-parent-task
 
 import { ModalProjectComponent } from '../modal-project/modal-project.component';
 
-import { CompareDate } from '../../helper/compare-date.validator';
 
 @Component({
   selector: 'app-task-view',

@@ -36,8 +36,8 @@
                 <mat-datepicker-toggle matSuffix [for]="endDatepicker"></mat-datepicker-toggle>
                 <mat-datepicker #endDatepicker></mat-datepicker>
                 <div *ngIf="isSubmitted && formControls.endDate.errors" class="help-block">
-                   
-                <div *ngIf="formControls.endDate.errors.compareDate">End Date Must be greater than start date</div>
+
+                <div *ngIf="formControls.endDate.errors.mustMatch">End Date Must be greater than start date</div>
 
       </div>
     </div>
