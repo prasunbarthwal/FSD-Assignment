@@ -146,6 +146,7 @@ public class TaskControllerTest {
     public void verifyUpdateTask() throws Exception {
 
         TaskDto taskDto = TaskDto.builder()
+                .taskId(Long.valueOf(1))
                 .userId(Long.valueOf(1)).userName("user")
                 .task("task")
                 .projectName("project")
@@ -157,7 +158,7 @@ public class TaskControllerTest {
                 .isParent(false)
                 .priority(1)
                 .build();
-        mockMvc.perform(MockMvcRequestBuilders.post("/fsd/updateTask")
+        mockMvc.perform(MockMvcRequestBuilders.put("/fsd/updateTask")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(taskDto))
                 .accept(MediaType.APPLICATION_JSON))
