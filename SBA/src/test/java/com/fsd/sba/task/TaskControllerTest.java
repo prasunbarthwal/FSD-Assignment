@@ -24,6 +24,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -124,7 +125,7 @@ public class TaskControllerTest {
                 .andExpect(jsonPath("$.taskId").exists())
                 .andExpect(jsonPath("$.projectId").exists())
                 .andExpect(jsonPath("$.projectName").exists())
-
+        .andDo(MockMvcResultHandlers.print())
 
                 .andDo(print())
                 .andExpect(status().is(200));
